@@ -1,6 +1,7 @@
 #pragma once
 
 #include <tuple>
+#include <cmath>
 
 template <typename T>
 struct Vector2 {
