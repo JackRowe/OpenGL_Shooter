@@ -13,7 +13,7 @@ private:
 	std::vector<Vector3<float>*> vertices = { {} };
 	std::vector<Vector3<float>*> normals = { {} };
 	std::vector<Vector2<float>*> uvs = { {} };
-	std::vector<std::vector<Vector3<int>>> faces = { { {} } };
+	std::vector<std::vector<Vector3<int>*>> faces = { { {} } };
 public:
 	enum objHeader {
 		none,
