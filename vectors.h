@@ -7,8 +7,9 @@ template <typename T>
 struct Vector2 {
 	T x, y;
 	
-	// both empty and filled constructors
+	// both empty, filled and partially filled constructors
 	Vector2() : x(0), y(0) {}
+    Vector2(T x) : x(x), y(x) {}
 	Vector2(T x, T y) : x(x), y(y) {}
 
 #pragma region mathmatic operations
@@ -146,6 +147,7 @@ struct Vector3 {
 
     // both empty and filled constructors
     Vector3() : x(0), y(0), z(0) {}
+    Vector3(T x) : x(x), y(x), z(x) {}
     Vector3(T x, T y, T z) : x(x), y(y), z(z) {}
 
 #pragma region mathmatic operations

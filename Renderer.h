@@ -9,6 +9,7 @@
 #include "glut.h"
 #include "constants.h"
 #include "vectors.h"
+#include "model.h"
 
 class renderer
 {

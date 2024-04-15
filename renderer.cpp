@@ -23,7 +23,7 @@ renderer::~renderer() {
 }
 
 void renderer::start() {
-	
+	model newModel;
 }
 
 void renderer::display(int deltaTime) {
