@@ -135,6 +135,7 @@
     <ClInclude Include="constants.h" />
     <ClInclude Include="glut.h" />
     <ClInclude Include="renderer.h" />
+    <ClInclude Include="vectors.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

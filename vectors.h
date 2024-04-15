@@ -1,5 +1,7 @@
 #pragma once
 
+#include <tuple>
+
 template <typename T>
 struct Vector2 {
 	T x, y;
@@ -33,27 +35,51 @@ struct Vector2 {
 		return *this;
 	}
 
-	// multiply
+	// multiply by scalar
 	Vector2 operator*(T scalar) const {
 		return Vector2(x * scalar, y * scalar);
 	}
 
-	// multiply in place
+	// multiply in place by scalar
 	Vector2& operator*=(T scalar) {
 		x *= scalar;
 		y *= scalar;
 		return *this;
 	}
 
-	// divide
+	// multiply by vector
+	Vector2 operator*(const Vector2& vector) const {
+		return Vector2(x * vector.x, y * vector.y);
+	}
+
+	// multiply in place by vector
+	Vector2 operator*(const Vector2& vector) {
+		x *= vector.x;
+		y *= vector.y;
+		return *this;
+	}
+
+	// divide by scalar
 	Vector2 operator/(T scalar) const {
 		return Vector2(x / scalar, y / scalar);
 	}
 
-	// divide in place
+	// divide in place by scalar
 	Vector2& operator/=(T scalar) {
 		x /= scalar;
 		y /= scalar;
+		return *this;
+	}
+
+	// divide by vector
+	Vector2 operator/(const Vector2& vector) const {
+		return Vector2(x / vector.x, y / vector.y);
+	}
+
+	// divide in place by vector
+	Vector2& operator/=(const Vector2& vector) {
+		x /= vector.x;
+		y /= vector.y;
 		return *this;
 	}
 #pragma endregion
@@ -95,7 +121,7 @@ struct Vector2 {
 		return std::sqrt(static_cast<T>(x * x + y * y));
 	}
 
-	Vector2 normalize const{
+	Vector2 normalize() const{
 		T length = length();
 
 		if (length == static_cast<T>(0)) return;
@@ -117,6 +143,7 @@ template <typename T>
 struct Vector3 {
     T x, y, z;
 
+    // both empty and filled constructors
     Vector3() : x(0), y(0), z(0) {}
     Vector3(T x, T y, T z) : x(x), y(y), z(z) {}
 
@@ -148,12 +175,12 @@ struct Vector3 {
         return *this;
     }
 
-    // multiply
+    // multiply by scalar
     Vector3 operator*(T scalar) const {
         return Vector3(x * scalar, y * scalar, z * scalar);
     }
 
-    // multiply in place
+    // multiply in place by scalar
     Vector3& operator*=(T scalar) {
         x *= scalar;
         y *= scalar;
@@ -161,16 +188,42 @@ struct Vector3 {
         return *this;
     }
 
-    // divide
+    // multiply by vector
+    Vector3 operator*(const Vector3& vector) const {
+        return Vector3(x * vector.x, y * vector.y, z * vector.z);
+    }
+
+    // multiply in place by vector
+    Vector3& operator*=(const Vector3& vector) {
+        x *= vector.x;
+        y *= vector.y;
+        z *= vector.z;
+        return *this;
+    }
+
+    // divide by scalar
     Vector3 operator/(T scalar) const {
         return Vector3(x / scalar, y / scalar, z / scalar);
     }
 
-    // divide in place
+    // divide in place by scalar
     Vector3& operator/=(T scalar) {
         x /= scalar;
         y /= scalar;
         z /= scalar;
+        return *this;
+    }
+
+    // divide by vector
+    Vector3 operator/(const Vector3& vector) const {
+        return Vector3(x / vector.x, y / vector.y, z / vector.z);
+    }
+
+    // divide in place by vector
+    Vector3& operator/=(const Vector3& vector) {
+        x /= vector.x;
+        y /= vector.y;
+        z /= vector.z;
         return *this;
     }
 
@@ -219,7 +272,7 @@ struct Vector3 {
     Vector3 normalize() const {
         T len = length();
         if (len == static_cast<T>(0)) return *this;
-        return Vector3(x / len, y / len, z / len);
+        return Vector3<T>(x / len, y / len, z / len);
     }
 
     T dot(const Vector3& other) const {
@@ -227,9 +280,11 @@ struct Vector3 {
     }
 
     Vector3 cross(const Vector3& other) const {
-        return Vector3(y * other.z - z * other.y,
+        return Vector3(
+            y * other.z - z * other.y,
             z * other.x - x * other.z,
-            x * other.y - y * other.x);
+            x * other.y - y * other.x
+        );
     }
 
 #pragma endregion

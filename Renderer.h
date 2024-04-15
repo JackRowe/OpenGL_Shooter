@@ -3,10 +3,12 @@
 #include <Windows.h>
 #include <gl/GL.h>
 #include <gl/GLU.h>
+#include <iostream>
 
 #include "GL\freeglut.h"
 #include "glut.h"
 #include "constants.h"
+#include "vectors.h"
 
 class renderer
 {

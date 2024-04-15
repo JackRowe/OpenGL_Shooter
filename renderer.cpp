@@ -23,7 +23,11 @@ renderer::~renderer() {
 }
 
 void renderer::start() {
-
+	Vector2<int> v1 = { 1, 2 };
+	Vector2<int> v2 = { 50, 100 };
+	Vector2<int> v3 = v1 * v2;
+	
+	std::cout << v3.x << ", " << v3.y << std::endl;
 }
 
 void renderer::display(int deltaTime) {
