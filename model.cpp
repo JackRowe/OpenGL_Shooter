@@ -1,10 +1,6 @@
 #include "model.h"
 
-model::model(mesh* newMesh, texture* newTexture, Vector3<float> newPosition, Vector3<float> newRotation, Vector3<float> newScale) : object(newPosition, newRotation, newScale) {
-	std::cout << "model constructer" << std::endl;
-}
-
-model::~model() {
-	delete _mesh;
-	delete _texture;
+model::model(mesh* newMesh, texture* newTexture, const Vector3<float>& newPosition, const Vector3<float>& newRotation, const Vector3<float>& newScale) : object(newPosition, newRotation, newScale) {
+	_mesh = newMesh;
+	_texture = newTexture;
 }

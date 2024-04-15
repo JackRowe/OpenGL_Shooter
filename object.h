@@ -12,9 +12,9 @@ private:
 	Vector3<float> scale = { 0.0f };
 public:
 	object(
-		Vector3<float> newPosition = { 0.0f },
-		Vector3<float> newRotation = { 0.0f },
-		Vector3<float> newScale = { 0.0f }
+		const Vector3<float>& newPosition = { 0.0f },
+		const Vector3<float>& newRotation = { 0.0f },
+		const Vector3<float>& newScale = { 0.0f }
 	);
 
 	~object() {};

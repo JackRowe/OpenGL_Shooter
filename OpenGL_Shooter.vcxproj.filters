@@ -25,6 +25,12 @@
     <Filter Include="Source Files\util">
       <UniqueIdentifier>{85ff595a-c15d-45b0-a5e8-ec61ddbaed19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\visuals">
+      <UniqueIdentifier>{cf902747-a444-41b5-8566-0d05b446db09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\visuals">
+      <UniqueIdentifier>{18f8ff00-d475-4240-81f9-9fd05a387da1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,20 +42,20 @@
     <ClCompile Include="object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="model.cpp">
       <Filter>Source Files\objects</Filter>
     </ClCompile>
     <ClCompile Include="glut.cpp">
       <Filter>Source Files\util</Filter>
     </ClCompile>
+    <ClCompile Include="texture.cpp">
+      <Filter>Source Files\visuals</Filter>
+    </ClCompile>
+    <ClCompile Include="mesh.cpp">
+      <Filter>Source Files\visuals</Filter>
+    </ClCompile>
     <ClCompile Include="material.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\visuals</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -62,12 +68,6 @@
     <ClInclude Include="object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="model.h">
       <Filter>Header Files\objects</Filter>
     </ClInclude>
@@ -77,8 +77,14 @@
     <ClInclude Include="vectors.h">
       <Filter>Header Files\util</Filter>
     </ClInclude>
+    <ClInclude Include="texture.h">
+      <Filter>Header Files\visuals</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.h">
+      <Filter>Header Files\visuals</Filter>
+    </ClInclude>
     <ClInclude Include="material.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\visuals</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
