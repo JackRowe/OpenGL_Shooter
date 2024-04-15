@@ -18,6 +18,7 @@ class renderer
 private:
 	int frame = 0;
 
+	std::vector<object*> objects = {};
 	std::vector<mesh*> meshes = {};
 public:
 	renderer() {};

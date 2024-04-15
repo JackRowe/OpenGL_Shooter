@@ -6,3 +6,4 @@
 
 #define NO_MESH nullptr
 #define NO_TEXTURE nullptr
+#define NO_PARENT nullptr
