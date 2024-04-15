@@ -4,12 +4,14 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 #include <iostream>
+#include <vector>
 
 #include "GL\freeglut.h"
 #include "glut.h"
 #include "constants.h"
 #include "vectors.h"
 #include "model.h"
+#include "mesh.h"
 
 class renderer
 {

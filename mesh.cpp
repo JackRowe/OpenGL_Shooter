@@ -15,36 +15,6 @@ void mesh::clean() {
 	faces.clear();
 }
 
-template <typename T>
-void parseComponents(std::string& line, std::vector<T*>& components, const char& delimiter) {
-	T component = T();
-	int componentSize = sizeof(T) / sizeof(float);
-
-	for (int i = 0; i < componentSize; i++) {
-		std::string s = line.substr(0, line.find_first_of(' '));
-		float value = std::stof(s);
-
-		switch (i) {
-		case 0:
-			component.x = value;
-			break;
-		case 1:
-			component.y = value;
-			break;
-		case 2:
-			component.z = value;
-			break;
-		case 3:
-			component.w = value;
-			break;
-		}
-
-		line = line.substr(line.find_first_of(' ') + 1, line.length());
-	}
-
-	components.push_back(&component);
-}
-
 bool mesh::load(const std::string& path) {
 	clean();
 
@@ -66,17 +36,65 @@ bool mesh::load(const std::string& path) {
 
 		switch (currentHeader) {
 			case vertex: {
-				parseComponents<Vector3<float>>(line, vertices, ' ');
+				Vector3<float> vertex = { 0.0f };
+				// loop over each component of the vertex and add it to vertex before removing that component from the line
+				for (int i = 0; i < 3; i++)
+				{
+					std::string s = line.substr(0, line.find_first_of(' '));
+					if (i == 0){
+						vertex.x = std::stof(s);
+					}
+					else if (i == 1){
+						vertex.y = std::stof(s);
+					}
+					else{
+						vertex.z = std::stof(s);
+					}
+					line = line.substr(line.find_first_of(' ') + 1, line.length());
+				}
+				// push back the vertices vector with a pointer to the vertex data
+				vertices.push_back(&vertex);
 				break;
 			}
 
 			case uv: {
-				parseComponents<Vector2<float>>(line, uvs, ' ');
+				Vector2<float> uv = { 0.0f };
+				// loop over each component of the uv and add it to uv before removing that component from the line
+				for (int i = 0; i < 3; i++)
+				{
+					std::string s = line.substr(0, line.find_first_of(' '));
+					if (i == 0) {
+						uv.x = std::stof(s);
+					}
+					else {
+						uv.y = std::stof(s);
+					}
+					line = line.substr(line.find_first_of(' ') + 1, line.length());
+				}
+				// push back the vertices vector with a pointer to the uv data
+				uvs.push_back(&uv);
 				break;
 			}
 
 			case normal: {
-				parseComponents<Vector3<float>>(line, vertices, ' ');
+				Vector3<float> normal = { 0.0f };
+				// loop over each component of the normal and add it to normal before removing that component from the line
+				for (int i = 0; i < 3; i++)
+				{
+					std::string s = line.substr(0, line.find_first_of(' '));
+					if (i == 0) {
+						normal.x = std::stof(s);
+					}
+					else if (i == 1) {
+						normal.y = std::stof(s);
+					}
+					else {
+						normal.z = std::stof(s);
+					}
+					line = line.substr(line.find_first_of(' ') + 1, line.length());
+				}
+				// push back the vertices vector with a pointer to the normal data
+				normals.push_back(&normal);
 				break;
 			}
 
@@ -90,7 +108,25 @@ bool mesh::load(const std::string& path) {
 
 					if (lastLine == tempLine) continue;
 
-					parseComponents<Vector3<int>>(tempLine, face, '/');
+					Vector3<int> index = { 0 };
+					// loop over each component of the index and add it to index before removing that component from the line
+					for (int i = 0; i < 3; i++)
+					{
+						std::string s = line.substr(0, line.find_first_of('/'));
+						if (i == 0) {
+							index.x = std::stof(s);
+						}
+						else if (i == 1) {
+							index.y = std::stof(s);
+						}
+						else {
+							index.z = std::stof(s);
+						}
+						line = line.substr(line.find_first_of('/') + 1, line.length());
+					}
+					// push back the vertices vector with a pointer to the index data
+					face.push_back(&index);
+					
 					line = line.substr(line.find_first_of(' ') + 1, line.length());
 					lastLine = tempLine;
 				}
