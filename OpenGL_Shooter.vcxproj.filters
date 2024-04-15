@@ -48,6 +48,9 @@
     <ClCompile Include="glut.cpp">
       <Filter>Source Files\util</Filter>
     </ClCompile>
+    <ClCompile Include="material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renderer.h">
@@ -73,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="vectors.h">
       <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="material.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

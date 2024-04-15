@@ -5,5 +5,5 @@ object::object(Vector3<float> newPosition, Vector3<float> newRotation, Vector3<f
 	rotation = newRotation;
 	scale = newScale;
 
-	std::cout << "object constructer" << std::endl;
+	std::cout << newPosition.x << ", " << newPosition.y << ", " << newPosition << std::endl;
 }
