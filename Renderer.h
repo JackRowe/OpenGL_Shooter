@@ -17,6 +17,8 @@ class renderer
 {
 private:
 	int frame = 0;
+
+	std::vector<mesh*> meshes = {};
 public:
 	renderer() {};
 	renderer(int argc, char* argv[]);

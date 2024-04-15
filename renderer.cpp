@@ -23,7 +23,7 @@ renderer::~renderer() {
 }
 
 void renderer::start() {
-	
+	meshes.push_back(new mesh("Assets/barrel.obj"));
 }
 
 void renderer::display(int deltaTime) {

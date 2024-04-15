@@ -145,6 +145,6 @@ bool mesh::load(const std::string& path) {
 
 	auto end = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-	std::cout << "loaded: " << path << " : " << vertices.size() << " vertices : " << faces.size() << " faces : in " << duration.count() << " ms" << std::endl;
+	std::cout << "loaded: " << path << " : " << vertices.size() << " verticies : " << faces.size() << " faces : in " << duration.count() << " ms" << std::endl;
 	return true;
 }
