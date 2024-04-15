@@ -23,11 +23,7 @@ renderer::~renderer() {
 }
 
 void renderer::start() {
-	Vector2<int> v1 = { 1, 2 };
-	Vector2<int> v2 = { 50, 100 };
-	Vector2<int> v3 = v1 * v2;
 	
-	std::cout << v3.x << ", " << v3.y << std::endl;
 }
 
 void renderer::display(int deltaTime) {
@@ -35,6 +31,7 @@ void renderer::display(int deltaTime) {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	// hello triangle
 	glPushMatrix();
 	glBegin(GL_TRIANGLES);
 		glColor3f(1.0f, 1.0f, 1.0f);
