@@ -14,12 +14,12 @@ private:
     texture* _texture = nullptr;
 public:
     model(
-        mesh* newMesh = NO_MESH, 
-        texture* newTexture = NO_TEXTURE, 
+        mesh* newMesh = nullptr,
+        texture* newTexture = nullptr,
         const Vector3<float>& newPosition = { 0.0f }, 
         const Vector3<float>& newRotation = { 0.0f }, 
         const Vector3<float>& newScale = { 0.0f },
-        object* parent = NO_PARENT
+        object* parent = nullptr
     );
     ~model() {};
 };
