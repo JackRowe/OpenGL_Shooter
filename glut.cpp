@@ -29,4 +29,12 @@ namespace GLUT {
 		if (_renderer == nullptr) return;
 		_renderer->keyboard(key, x, y, false);
 	}
+
+	void mouseButton(int button, int state, int x, int y) {
+		if (_renderer == nullptr) return;
+	}
+
+	void mouseMotion(int x, int  y) {
+		if (_renderer == nullptr) return;
+	}
 }

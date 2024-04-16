@@ -47,8 +47,6 @@ void renderer::start() {
 
 	cam = new camera;
 	controller = new input;
-
-	objects.push_back(cam);
 }
 
 void drawVector(std::vector<object*> objs)
@@ -90,17 +88,19 @@ void renderer::update(int deltaTime) {
 	glutPostRedisplay();
 	glLoadIdentity();
 
-	const Vector3<float>& position = cam->getPosition();
-	const Vector3<int>& inputVector = controller->getInputVector();
-	cam->setPosition(
-		position.x + inputVector.x,
-		position.y + inputVector.y,
-		position.z + inputVector.z
-	);
+	cam->update(controller->getInputVector());
 
 	updateVector(objects);
 }
 
 void renderer::keyboard(unsigned char key, int x, int y, bool state) {
 	controller->setKeyState(key, state);
+}
+
+void renderer::mouseButton(int button, int state, int x, int y) {
+
+}
+
+void renderer::mouseMotion(int x, int y) {
+
 }

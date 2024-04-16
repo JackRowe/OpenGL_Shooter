@@ -20,6 +20,6 @@ public:
 		object* newParent = nullptr
 	) : object(newPosition, newRotation, newScale, newParent) {};
 
-	void update() override;
+	void update(const Vector3<int>& inputVector);
 };
 
