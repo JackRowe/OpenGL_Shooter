@@ -1,14 +1,16 @@
 #include "camera.h"
 
 void camera::update() {
-	gluLookAt(
-		0.0f,
-		0.0f,
-		1.0f,
+	const Vector3<float>& position = getPosition();
 
-		0.0f,
-		0.0f,
-		-1.0f,
+	gluLookAt(
+		position.x,
+		position.y,
+		position.z,
+
+		position.x,
+		position.y,
+		position.z - 1.0f,
 
 		0.0f,
 		1.0f,

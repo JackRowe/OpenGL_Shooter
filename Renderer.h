@@ -21,6 +21,7 @@ class renderer
 private:
 	int frame = 0;
 	input* controller;
+	camera* cam;
 
 	std::vector<object*> objects = {};
 	std::vector<mesh*> meshes = {};

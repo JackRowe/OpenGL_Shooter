@@ -19,5 +19,6 @@ public:
 	bool getKeyState(unsigned char key) { return keyStates[key]; };
 
 	void updateInputVector();
+	const Vector3<int>& getInputVector() { return inputVector; };
 };
 

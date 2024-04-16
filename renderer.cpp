@@ -45,8 +45,10 @@ void renderer::start() {
 	objects.push_back(new model(meshes[0], textures[0], {2.0f, 0.0f, -10.0f}));
 	objects.push_back(new model(meshes[0], nullptr, { -2.0f, 0.0f, -10.0f }));
 
-	objects.push_back(new camera());
+	cam = new camera;
 	controller = new input;
+
+	objects.push_back(cam);
 }
 
 void drawVector(std::vector<object*> objs)
@@ -87,6 +89,14 @@ void updateVector(std::vector<object*> objs)
 void renderer::update(int deltaTime) {
 	glutPostRedisplay();
 	glLoadIdentity();
+
+	const Vector3<float>& position = cam->getPosition();
+	const Vector3<int>& inputVector = controller->getInputVector();
+	cam->setPosition(
+		position.x + inputVector.x,
+		position.y + inputVector.y,
+		position.z + inputVector.z
+	);
 
 	updateVector(objects);
 }
