@@ -9,12 +9,12 @@ void model::draw() {
 	if (_mesh == nullptr) return;
 
 	std::vector<Vector3<float>>* vertices = _mesh->getVertices();
+	std::vector<Vector2<float>>* uvs = _mesh->getUVs();
 	std::vector<std::vector<Vector3<int>>>* faces = _mesh->getFaces();
 
 	const Vector3<float>& position = getPosition();
 	const Vector3<float>& rotation = getRotation();
 	const Vector3<float>& scale = getScale();
-
 
 	glPushMatrix();
 
@@ -22,6 +22,8 @@ void model::draw() {
 	glRotatef(rotation.x, 1.0f, 0.0f, 0.0f);
 	glRotatef(rotation.y, 0.0f, 1.0f, 0.0f);
 	glRotatef(rotation.z, 0.0f, 0.0f, 1.0f);
+
+	_texture == nullptr ? glDisable(GL_TEXTURE_2D) : glEnable(GL_TEXTURE_2D);
 
 	for (int i = 0; i < faces->size(); i++) {
 		std::vector<Vector3<int>> face = faces->at(i);
@@ -32,11 +34,19 @@ void model::draw() {
 		{
 			Vector3<int> index = face[j];
 			Vector3<float> vertex = vertices->at(index.x - 1);
+			Vector2<float> uv = uvs->at(index.y - 1);
+
+			glTexCoord2f(uv.x, uv.y);
 			glVertex3f(vertex.x, vertex.y, vertex.z);
 		}
 
 		glEnd();
 	}
 
+	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
+}
+
+void update() {
+
 }

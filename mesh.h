@@ -45,6 +45,7 @@ public:
 	~mesh();
 
 	std::vector<Vector3<float>>* getVertices() { return &vertices; };
+	std::vector<Vector2<float>>* getUVs() { return &uvs; };
 	std::vector<std::vector<Vector3<int>>>* getFaces() { return &faces; };
 
 	void clean();

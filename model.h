@@ -27,5 +27,6 @@ public:
     ~model() {};
 
     void draw() override;
+    void update() override;
 };
 
