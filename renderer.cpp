@@ -37,7 +37,8 @@ renderer::~renderer() {
 
 void renderer::start() {
 	meshes.push_back(new mesh("Assets/cube.obj"));
-	objects.push_back(new model(meshes[0], nullptr, {2.0f, 0.0f, -10.0f}));
+	textures.push_back(new texture("Assets/cube.png"));
+	objects.push_back(new model(meshes[0], textures[0], {2.0f, 0.0f, -10.0f}));
 	objects.push_back(new model(meshes[0], nullptr, { -2.0f, 0.0f, -10.0f }));
 }
 

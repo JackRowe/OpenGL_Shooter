@@ -86,5 +86,8 @@
     <ClInclude Include="object.h">
       <Filter>Header Files\objects</Filter>
     </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Header Files\util</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

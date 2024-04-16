@@ -12,6 +12,7 @@
 #include "vectors.h"
 #include "model.h"
 #include "mesh.h"
+#include "stb_image.h"
 
 class renderer
 {
@@ -20,6 +21,7 @@ private:
 
 	std::vector<object*> objects = {};
 	std::vector<mesh*> meshes = {};
+	std::vector<texture*> textures = {};
 public:
 	renderer() {};
 	renderer(int argc, char* argv[]);

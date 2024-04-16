@@ -144,6 +144,7 @@
     <ClInclude Include="model.h" />
     <ClInclude Include="object.h" />
     <ClInclude Include="renderer.h" />
+    <ClInclude Include="stb_image.h" />
     <ClInclude Include="texture.h" />
     <ClInclude Include="vectors.h" />
   </ItemGroup>
