@@ -27,6 +27,10 @@ public:
 	virtual void draw() {};
 	virtual void update() {};
 
+	void setPosition(float x, float y, float z) { position.x = x; position.y = y; position.z = z; };
+	void setRotation(float x, float y, float z) { rotation.x = x; rotation.y = y; rotation.z = z; };
+	void setScale(float x, float y, float z) { scale.x = x; scale.y = y; scale.z = z; };
+
 	const Vector3<float>& getPosition() const { return position; }
 	const Vector3<float>& getRotation() const { return rotation; }
 	const Vector3<float>& getScale() const { return scale; }

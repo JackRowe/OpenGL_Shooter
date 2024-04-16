@@ -36,6 +36,8 @@ renderer::~renderer() {
 }
 
 void renderer::start() {
+	stbi_set_flip_vertically_on_load(true);
+
 	meshes.push_back(new mesh("Assets/cube.obj"));
 	textures.push_back(new texture("Assets/cube.png"));
 	objects.push_back(new model(meshes[0], textures[0], {2.0f, 0.0f, -10.0f}));
@@ -65,6 +67,18 @@ void renderer::display(int deltaTime) {
 	glutSwapBuffers();
 }
 
+void updateVector(std::vector<object*> objs)
+{
+	for (int i = 0; i < objs.size(); i++)
+	{
+		object* obj = objs[i];
+
+
+		if (obj->getChildren()->size() <= 0) obj->update();
+		else updateVector(*obj->getChildren());
+	}
+}
+
 void renderer::update(int deltaTime) {
 	glutPostRedisplay();
 	glLoadIdentity();
@@ -81,4 +95,6 @@ void renderer::update(int deltaTime) {
 		1.0f,
 		0.0f
 	);
+
+	updateVector(objects);
 }
