@@ -45,8 +45,8 @@ void renderer::start() {
 
 	meshes.push_back(new mesh("Assets/cube.obj"));
 	textures.push_back(new texture("Assets/cube.png"));
-	objects.push_back(new model(meshes[0], textures[0], {2.0f, 0.0f, -10.0f}));
-	objects.push_back(new model(meshes[0], nullptr, { 0.0f, -10.0f, 0.0f }, { 0.0f }, {10.0f, 1.0f, 10.0f}));
+	objects.push_back(new model(meshes[0], textures[0], {10.0f, 0.0f, 0.0f}));
+	objects.push_back(new model(meshes[0], textures[0], { 0.0f, -10.0f, 0.0f }, { 0.0f }, {20.0f, 1.0f, 20.0f}));
 
 	cam = new camera;
 	controller = new input;
@@ -99,7 +99,6 @@ void renderer::update(int deltaTime) {
 
 		cam->setPitch(pitch + ((float)mouseDelta.y));
 		cam->setYaw(yaw + ((float)mouseDelta.x));
-		//cam->setRotation(CameraRotation.x + (float)(mouseDelta.x / 1.0f), CameraRotation.y - (float)(mouseDelta.y / 1.0f));
 	}
 
 	controller->setMouseDelta({ 0 });

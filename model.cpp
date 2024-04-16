@@ -48,6 +48,5 @@ void model::draw() {
 }
 
 void model::update() {
-	const Vector3<float>& rotation = getRotation();
-	setRotation(rotation.x + 1.0f, rotation.y + 1.0f, rotation.z + 1.0f);
+	
 }
