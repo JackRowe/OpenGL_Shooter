@@ -22,6 +22,9 @@ renderer::renderer(int argc, char* argv[]) {
 	glutTimerFunc(REFRESH_RATE, GLUT::loop, REFRESH_RATE);
 	glutKeyboardFunc(GLUT::keyboardDown);
 	glutKeyboardUpFunc(GLUT::keyboardUp);
+	glutMotionFunc(GLUT::mouseMotion);
+	glutPassiveMotionFunc(GLUT::mouseMotion);
+	glutMouseFunc(GLUT::mouseButton);
 
 	// set up the projection
 	glMatrixMode(GL_PROJECTION);
@@ -43,7 +46,7 @@ void renderer::start() {
 	meshes.push_back(new mesh("Assets/cube.obj"));
 	textures.push_back(new texture("Assets/cube.png"));
 	objects.push_back(new model(meshes[0], textures[0], {2.0f, 0.0f, -10.0f}));
-	objects.push_back(new model(meshes[0], nullptr, { -2.0f, 0.0f, -10.0f }));
+	objects.push_back(new model(meshes[0], nullptr, { 0.0f, -10.0f, 0.0f }, { 0.0f }, {10.0f, 1.0f, 10.0f}));
 
 	cam = new camera;
 	controller = new input;
@@ -88,6 +91,19 @@ void renderer::update(int deltaTime) {
 	glutPostRedisplay();
 	glLoadIdentity();
 
+	if (controller->getMouseState(0))
+	{
+		Vector2<int> mouseDelta = controller->getMouseDelta();
+		float pitch = cam->getPitch();
+		float yaw = cam->getYaw();
+
+		cam->setPitch(pitch + ((float)mouseDelta.y));
+		cam->setYaw(yaw + ((float)mouseDelta.x));
+		//cam->setRotation(CameraRotation.x + (float)(mouseDelta.x / 1.0f), CameraRotation.y - (float)(mouseDelta.y / 1.0f));
+	}
+
+	controller->setMouseDelta({ 0 });
+
 	cam->update(controller->getInputVector());
 
 	updateVector(objects);
@@ -98,9 +114,9 @@ void renderer::keyboard(unsigned char key, int x, int y, bool state) {
 }
 
 void renderer::mouseButton(int button, int state, int x, int y) {
-
+	controller->setMouseState(button, state, x, y);
 }
 
 void renderer::mouseMotion(int x, int y) {
-
+	controller->updateMouseMotion(x, y);
 }

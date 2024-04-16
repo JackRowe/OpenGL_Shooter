@@ -20,6 +20,12 @@ public:
 		object* newParent = nullptr
 	) : object(newPosition, newRotation, newScale, newParent) {};
 
-	void update(const Vector3<int>& inputVector);
+	float getPitch() { return pitch; };
+	float getYaw() { return yaw; };
+
+	void setPitch(const float& newPitch) { pitch = newPitch; };
+	void setYaw(const float& newYaw) { yaw = newYaw; };
+
+	void update(Vector3<int>& inputVector);
 };
 

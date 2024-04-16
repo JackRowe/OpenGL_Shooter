@@ -32,9 +32,11 @@ namespace GLUT {
 
 	void mouseButton(int button, int state, int x, int y) {
 		if (_renderer == nullptr) return;
+		_renderer->mouseButton(button, state, x, y);
 	}
 
 	void mouseMotion(int x, int  y) {
 		if (_renderer == nullptr) return;
+		_renderer->mouseMotion(x, y);
 	}
 }

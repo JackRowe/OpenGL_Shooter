@@ -19,6 +19,14 @@ public:
 	bool getKeyState(unsigned char key) { return keyStates[key]; };
 
 	void updateInputVector();
-	const Vector3<int>& getInputVector() { return inputVector; };
+	Vector3<int>& getInputVector() { return inputVector; };
+
+	void setMouseState(int button, int state, int x, int y);
+	bool getMouseState(int button) { return mouseStates[button]; };
+
+	void updateMouseMotion(int x, int y);
+
+	Vector2<int> getMouseDelta() { return mouseDelta; };
+	void setMouseDelta(const Vector2<int>& newMouseDelta) { mouseDelta = newMouseDelta; };
 };
 

@@ -2,7 +2,7 @@
 
 float toRadians(float Input) { return Input * 3.14159265359 / 180.0f; };
 
-void camera::update(const Vector3<int>& inputVector) {
+void camera::update(Vector3<int>& inputVector) {
 	const Vector3<float>& position = getPosition();
 
 	pitch = min(80.0f, max(pitch, -80.0f));
@@ -16,12 +16,20 @@ void camera::update(const Vector3<int>& inputVector) {
 
 	direction = direction.normalize();
 
-	// convert the raw movement vector into one relative to the current rotation of the camera
+	std::cout << direction.x << ", " << direction.y << ", " << direction.z << std::endl;
+	setRotation(direction.x, direction.y, direction.z);
+
 	Vector3<GLfloat> RelativeMovementVector = {
 		cos(toRadians(yaw)) * -inputVector.z - sin(toRadians(yaw)) * inputVector.x,
 		(float)inputVector.y,
 		sin(toRadians(yaw)) * -inputVector.z + cos(toRadians(yaw)) * inputVector.x
 	};
+
+	setPosition(
+		position.x + RelativeMovementVector.x,
+		position.y + RelativeMovementVector.y,
+		position.z + RelativeMovementVector.z
+	);
 
 	gluLookAt(
 		position.x,

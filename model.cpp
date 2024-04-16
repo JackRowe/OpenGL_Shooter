@@ -37,7 +37,7 @@ void model::draw() {
 			Vector2<float> uv = uvs->at(index.y - 1);
 
 			glTexCoord2f(uv.x, uv.y);
-			glVertex3f(vertex.x, vertex.y, vertex.z);
+			glVertex3f(vertex.x * scale.x, vertex.y * scale.y, vertex.z * scale.z);
 		}
 
 		glEnd();

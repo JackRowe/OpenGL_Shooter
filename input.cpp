@@ -15,3 +15,14 @@ void input::updateInputVector() {
 
 	inputVector = { horizontal, vertical, forward };
 }
+
+void input::setMouseState(int button, int state, int x, int y) {
+	mouseStates[button] = !state;
+	//std::cout << button << " | " << state << std::endl;
+	mouseDelta = { 0, 0 };
+}
+
+void input::updateMouseMotion(int x, int y) {
+	mouseDelta = { mousePosition.x - x, mousePosition.y - y };
+	mousePosition = { x, y };
+}
