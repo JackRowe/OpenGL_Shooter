@@ -19,4 +19,14 @@ namespace GLUT {
 
 		glutTimerFunc(refreshRate - deltaTime, GLUT::loop, refreshRate);
 	}
+
+	void keyboardDown(unsigned char key, int x, int y) {
+		if (_renderer == nullptr) return;
+		_renderer->keyboard(key, x, y, true);
+	}
+
+	void keyboardUp(unsigned char key, int x, int y) {
+		if (_renderer == nullptr) return;
+		_renderer->keyboard(key, x, y, false);
+	}
 }

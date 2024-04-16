@@ -12,12 +12,15 @@
 #include "vectors.h"
 #include "model.h"
 #include "mesh.h"
+#include "camera.h"
+#include "input.h"
 #include "stb_image.h"
 
 class renderer
 {
 private:
 	int frame = 0;
+	input* controller;
 
 	std::vector<object*> objects = {};
 	std::vector<mesh*> meshes = {};
@@ -30,4 +33,5 @@ public:
 	void start();
 	void display(int deltaTime);
 	void update(int deltaTime);
+	void keyboard(unsigned char key, int x, int y, bool state);
 };

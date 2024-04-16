@@ -20,6 +20,8 @@ renderer::renderer(int argc, char* argv[]) {
 	start();
 
 	glutTimerFunc(REFRESH_RATE, GLUT::loop, REFRESH_RATE);
+	glutKeyboardFunc(GLUT::keyboardDown);
+	glutKeyboardUpFunc(GLUT::keyboardUp);
 
 	// set up the projection
 	glMatrixMode(GL_PROJECTION);
@@ -42,6 +44,9 @@ void renderer::start() {
 	textures.push_back(new texture("Assets/cube.png"));
 	objects.push_back(new model(meshes[0], textures[0], {2.0f, 0.0f, -10.0f}));
 	objects.push_back(new model(meshes[0], nullptr, { -2.0f, 0.0f, -10.0f }));
+
+	objects.push_back(new camera());
+	controller = new input;
 }
 
 void drawVector(std::vector<object*> objs)
@@ -82,19 +87,10 @@ void updateVector(std::vector<object*> objs)
 void renderer::update(int deltaTime) {
 	glutPostRedisplay();
 	glLoadIdentity();
-	gluLookAt(
-		0.0f,
-		0.0f,
-		1.0f,
-
-		0.0f,
-		0.0f,
-		-1.0f,
-
-		0.0f,
-		1.0f,
-		0.0f
-	);
 
 	updateVector(objects);
+}
+
+void renderer::keyboard(unsigned char key, int x, int y, bool state) {
+	controller->setKeyState(key, state);
 }

@@ -22,7 +22,7 @@ public:
         const Vector3<float>& newPosition = { 0.0f }, 
         const Vector3<float>& newRotation = { 0.0f }, 
         const Vector3<float>& newScale = { 1.0f },
-        object* parent = nullptr
+        object* newParent = nullptr
     );
     ~model() {};
 
