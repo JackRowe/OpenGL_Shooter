@@ -1,5 +1,8 @@
 #pragma once
 
+#include <Windows.h>
+#include <gl/GL.h>
+#include <gl/GLU.h>
 #include <iostream>
 
 #include "object.h"
@@ -18,9 +21,11 @@ public:
         texture* newTexture = nullptr,
         const Vector3<float>& newPosition = { 0.0f }, 
         const Vector3<float>& newRotation = { 0.0f }, 
-        const Vector3<float>& newScale = { 0.0f },
+        const Vector3<float>& newScale = { 1.0f },
         object* parent = nullptr
     );
     ~model() {};
+
+    void draw() override;
 };
 

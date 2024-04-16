@@ -55,7 +55,8 @@ bool mesh::load(const std::string& path) {
 					line = line.substr(line.find_first_of(' ') + 1, line.length());
 				}
 				// push back the vertices vector with a pointer to the vertex data
-				vertices.push_back(&vertex);
+				//std::cout << vertex.x << " " << vertex.y << " " << vertex.z << std::endl;
+				vertices.push_back(vertex);
 				break;
 			}
 
@@ -74,7 +75,7 @@ bool mesh::load(const std::string& path) {
 					line = line.substr(line.find_first_of(' ') + 1, line.length());
 				}
 				// push back the vertices vector with a pointer to the uv data
-				uvs.push_back(&uv);
+				uvs.push_back(uv);
 				break;
 			}
 
@@ -96,25 +97,27 @@ bool mesh::load(const std::string& path) {
 					line = line.substr(line.find_first_of(' ') + 1, line.length());
 				}
 				// push back the vertices vector with a pointer to the normal data
-				normals.push_back(&normal);
+				normals.push_back(normal);
 				break;
 			}
 
 			case face: {
-				std::vector<Vector3<int>*> face = { {} };
+				std::vector<Vector3<int>> face = {};
 				std::string lastLine = "";
 
 				for (int i = 0; i < 4; i++)
 				{
 					std::string tempLine = line.substr(0, line.find_first_of(' '));
-
-					if (lastLine == tempLine) continue;
+					if (lastLine == tempLine) { break; };
 
 					Vector3<int> index = { 0 };
 					// loop over each component of the index and add it to index before removing that component from the line
-					for (int i = 0; i < 3; i++)
+					for (int i = 0; i < 4; i++)
 					{
-						std::string s = line.substr(0, line.find_first_of('/'));
+						std::string s = tempLine.substr(0, line.find_first_of('/') + 1);
+
+						if (s[0] == ' ' || s.size() <= 0) { continue; }
+
 						if (i == 0) {
 							index.x = std::stof(s);
 						}
@@ -124,15 +127,17 @@ bool mesh::load(const std::string& path) {
 						else {
 							index.z = std::stof(s);
 						}
-						line = line.substr(line.find_first_of('/') + 1, line.length());
+						tempLine = tempLine.substr(tempLine.find_first_of('/') + 1, tempLine.find_first_of(' '));
 					}
 					// push back the vertices vector with a pointer to the index data
-					face.push_back(&index);
+					//std::cout << index.x << "/" << index.y << "/" << index.z << " ";
+					face.push_back(index);
 					
+					lastLine = line.substr(0, line.find_first_of(' '));
 					line = line.substr(line.find_first_of(' ') + 1, line.length());
-					lastLine = tempLine;
 				}
 
+				//std::cout << std::endl;
 				faces.push_back(face);
 				break;
 			}

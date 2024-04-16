@@ -12,10 +12,10 @@
 class mesh
 {
 private:
-	std::vector<Vector3<float>*> vertices = { {} };
-	std::vector<Vector3<float>*> normals = { {} };
-	std::vector<Vector2<float>*> uvs = { {} };
-	std::vector<std::vector<Vector3<int>*>> faces = { { {} } };
+	std::vector<Vector3<float>> vertices = { {} };
+	std::vector<Vector3<float>> normals = { {} };
+	std::vector<Vector2<float>> uvs = { {} };
+	std::vector<std::vector<Vector3<int>>> faces = { { {} } };
 public:
 	enum objHeader {
 		none,
@@ -43,6 +43,9 @@ public:
 
 	mesh(const std::string& path = "");
 	~mesh();
+
+	std::vector<Vector3<float>>* getVertices() { return &vertices; };
+	std::vector<std::vector<Vector3<int>>>* getFaces() { return &faces; };
 
 	void clean();
 	bool load(const std::string& path = "");
