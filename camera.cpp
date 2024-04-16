@@ -19,16 +19,16 @@ void camera::update(Vector3<int>& inputVector) {
 	std::cout << direction.x << ", " << direction.y << ", " << direction.z << std::endl;
 	setRotation(direction.x, direction.y, direction.z);
 
-	Vector3<GLfloat> RelativeMovementVector = {
+	Vector3<GLfloat> relativeVector = {
 		cos(toRadians(yaw)) * -inputVector.z - sin(toRadians(yaw)) * inputVector.x,
 		(float)inputVector.y,
 		sin(toRadians(yaw)) * -inputVector.z + cos(toRadians(yaw)) * inputVector.x
 	};
 
 	setPosition(
-		position.x + RelativeMovementVector.x,
-		position.y + RelativeMovementVector.y,
-		position.z + RelativeMovementVector.z
+		position.x + relativeVector.x,
+		position.y + relativeVector.y,
+		position.z + relativeVector.z
 	);
 
 	gluLookAt(

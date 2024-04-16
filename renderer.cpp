@@ -38,6 +38,18 @@ renderer::renderer(int argc, char* argv[]) {
 
 renderer::~renderer() {
 	// add delete loops for meshes objects and textures
+	for (int i = 0; i < meshes.size(); i++) {
+		delete meshes[i];
+	}
+
+	for (int i = 0; i < textures.size(); i++) {
+		delete textures[i];
+	}
+
+	for (int i = 0; i < objects.size(); i++) {
+		// loop thru each object and clear children
+		delete objects[i];
+	}
 }
 
 void renderer::start() {
@@ -87,6 +99,10 @@ void updateVector(std::vector<object*> objs)
 	}
 }
 
+float lerp(float a, float b, float t) {
+	return a + (b - a) * t;
+}
+
 void renderer::update(int deltaTime) {
 	glutPostRedisplay();
 	glLoadIdentity();
@@ -97,8 +113,8 @@ void renderer::update(int deltaTime) {
 		float pitch = cam->getPitch();
 		float yaw = cam->getYaw();
 
-		cam->setPitch(pitch + ((float)mouseDelta.y));
-		cam->setYaw(yaw + ((float)mouseDelta.x));
+		cam->setPitch(lerp(pitch, pitch - ((float)mouseDelta.y / 2.0f), 0.5f));
+		cam->setYaw(lerp(yaw, yaw + ((float)mouseDelta.x / 2.0f), 0.5f));
 	}
 
 	controller->setMouseDelta({ 0 });
