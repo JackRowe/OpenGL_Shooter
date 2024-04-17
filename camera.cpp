@@ -15,7 +15,7 @@ void camera::update(Vector3<int>& inputVector) {
 	};
 
 	direction = direction.normalize();
-	setRotation(direction.x, direction.y, direction.z);
+	setRotation(position.x + direction.x, position.y + direction.y, position.z + direction.z);
 
 	Vector3<GLfloat> relativeVector = {
 		cos(toRadians(yaw)) * -inputVector.z - sin(toRadians(yaw)) * inputVector.x,
@@ -28,6 +28,8 @@ void camera::update(Vector3<int>& inputVector) {
 		position.y + relativeVector.y,
 		position.z + relativeVector.z
 	);
+
+
 
 	gluLookAt(
 		position.x,

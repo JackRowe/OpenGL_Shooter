@@ -10,6 +10,7 @@
 #include "glut.h"
 #include "constants.h"
 #include "vectors.h"
+#include "structures.h"
 #include "model.h"
 #include "mesh.h"
 #include "camera.h"
@@ -27,6 +28,20 @@ private:
 	std::vector<mesh*> meshes = {};
 	std::vector<texture*> textures = {};
 public:
+	light* whiteLight = new light{
+		{0.2f, 0.2f, 0.2f, 1.0f},
+		{0.7f, 0.7f, 0.7f, 1.0f},
+		{0.5f, 0.5f, 0.5f, 1.0f},
+		{1.0f, 1.0f, 1.0f, 0.0f},
+	};
+
+	material* shiny = new material{
+		{1.0f, 1.0f, 1.0f, 1.0f},
+		{1.0f, 1.0f, 1.0f, 1.0f},
+		{1.0f, 1.0f, 1.0f, 1.0f},
+		100.0,
+	};
+
 	renderer() {};
 	renderer(int argc, char* argv[]);
 	~renderer();

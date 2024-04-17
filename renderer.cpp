@@ -19,8 +19,6 @@ renderer::renderer(int argc, char* argv[]) {
 
 	start();
 
-	glEnable(GL_LIGHTING);
-
 	glutTimerFunc(REFRESH_RATE, GLUT::loop, REFRESH_RATE);
 	glutKeyboardFunc(GLUT::keyboardDown);
 	glutKeyboardUpFunc(GLUT::keyboardUp);
@@ -56,14 +54,40 @@ renderer::~renderer() {
 
 void renderer::start() {
 	stbi_set_flip_vertically_on_load(true);
-
-	meshes.push_back(new mesh("Assets/cube.obj"));
-	textures.push_back(new texture("Assets/cube.png"));
-	objects.push_back(new model(meshes[0], textures[0], {10.0f, 0.0f, 0.0f}));
 	//objects.push_back(new model(meshes[0], textures[0], { 0.0f, -10.0f, 0.0f }, { 0.0f }, {20.0f, 1.0f, 20.0f}));
 
 	cam = new camera;
 	controller = new input;
+
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glMatrixMode(GL_MODELVIEW);
+
+	Vector3<float> camPosition = cam->getPosition();
+	Vector3<float> camRotation = cam->getRotation();
+
+	gluLookAt(
+		camPosition.x,
+		camPosition.y,
+		camPosition.z,
+
+		camRotation.x,
+		camRotation.y,
+		camRotation.z,
+
+		0.0f,
+		1.0f,
+		0.0f
+	);
+
+	glLightfv(GL_LIGHT0, GL_AMBIENT, whiteLight->ambient);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, whiteLight->diffuse);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, whiteLight->specular);
+	glLightfv(GL_LIGHT0, GL_POSITION, whiteLight->position);
+
+	meshes.push_back(new mesh("Assets/cube.obj"));
+	textures.push_back(new texture("Assets/cube.png"));
+	objects.push_back(new model(meshes[0], textures[0], shiny, { 10.0f, 0.0f, 0.0f }));
 }
 
 void drawVector(std::vector<object*> objs)
@@ -120,7 +144,6 @@ void renderer::update(int deltaTime) {
 	}
 
 	controller->setMouseDelta({ 0 });
-
 	cam->update(controller->getInputVector());
 
 	updateVector(objects);
