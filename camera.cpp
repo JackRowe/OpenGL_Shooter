@@ -15,8 +15,6 @@ void camera::update(Vector3<int>& inputVector) {
 	};
 
 	direction = direction.normalize();
-
-	std::cout << direction.x << ", " << direction.y << ", " << direction.z << std::endl;
 	setRotation(direction.x, direction.y, direction.z);
 
 	Vector3<GLfloat> RelativeMovementVector = {

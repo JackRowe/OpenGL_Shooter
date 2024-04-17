@@ -46,7 +46,7 @@ void renderer::start() {
 	meshes.push_back(new mesh("Assets/cube.obj"));
 	textures.push_back(new texture("Assets/cube.png"));
 	objects.push_back(new model(meshes[0], textures[0], {10.0f, 0.0f, 0.0f}));
-	objects.push_back(new model(meshes[0], textures[0], { 0.0f, -10.0f, 0.0f }, { 0.0f }, {20.0f, 1.0f, 20.0f}));
+	//objects.push_back(new model(meshes[0], textures[0], { 0.0f, -10.0f, 0.0f }, { 0.0f }, {20.0f, 1.0f, 20.0f}));
 
 	cam = new camera;
 	controller = new input;
@@ -87,6 +87,10 @@ void updateVector(std::vector<object*> objs)
 	}
 }
 
+float lerp(float a, float b, float t) {
+	return a + (b - a) * t;
+}
+
 void renderer::update(int deltaTime) {
 	glutPostRedisplay();
 	glLoadIdentity();
@@ -97,8 +101,8 @@ void renderer::update(int deltaTime) {
 		float pitch = cam->getPitch();
 		float yaw = cam->getYaw();
 
-		cam->setPitch(pitch + ((float)mouseDelta.y));
-		cam->setYaw(yaw + ((float)mouseDelta.x));
+		cam->setPitch(lerp(pitch, pitch - ((float)mouseDelta.y), 0.5f));
+		cam->setYaw(lerp(yaw, yaw + ((float)mouseDelta.x), 0.5f));
 	}
 
 	controller->setMouseDelta({ 0 });
