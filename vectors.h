@@ -292,3 +292,162 @@ struct Vector3 {
 
 #pragma endregion
 };
+
+template <typename T>
+struct Vector4 {
+    T x, y, z, w;
+
+    // both empty and filled constructors
+    Vector4() : x(0), y(0), z(0), w(0) {}
+    Vector4(T x) : x(x), y(x), z(x), w(x) {}
+    Vector4(T x, T y, T z, T w) : x(x), y(y), z(z), w(w) {}
+
+#pragma region mathmatic operations
+
+    // add
+    Vector4 operator+(const Vector4& other) const {
+        return Vector4(x + other.x, y + other.y, z + other.z, w + other.w);
+    }
+
+    // add in place
+    Vector4& operator+=(const Vector4& other) {
+        x += other.x;
+        y += other.y;
+        z += other.z;
+        w += other.w;
+        return *this;
+    }
+
+    // subtract
+    Vector4 operator-(const Vector4& other) const {
+        return Vector4(x - other.x, y - other.y, z - other.z, w - other.w);
+    }
+
+    // subtract in place
+    Vector4& operator-=(const Vector4& other) {
+        x -= other.x;
+        y -= other.y;
+        z -= other.z;
+        w -= other.w;
+        return *this;
+    }
+
+    // multiply by scalar
+    Vector4 operator*(T scalar) const {
+        return Vector4(x * scalar, y * scalar, z * scalar, w * scalar);
+    }
+
+    // multiply in place by scalar
+    Vector4& operator*=(T scalar) {
+        x *= scalar;
+        y *= scalar;
+        z *= scalar;
+        w *= scalar;
+        return *this;
+    }
+
+    // multiply by vector
+    Vector4 operator*(const Vector4& vector) const {
+        return Vector4(x * vector.x, y * vector.y, z * vector.z, w * vector.w);
+    }
+
+    // multiply in place by vector
+    Vector4& operator*=(const Vector4& vector) {
+        x *= vector.x;
+        y *= vector.y;
+        z *= vector.z;
+        w *= vector.w;
+        return *this;
+    }
+
+    // divide by scalar
+    Vector4 operator/(T scalar) const {
+        return Vector4(x / scalar, y / scalar, z / scalar, w / scalar);
+    }
+
+    // divide in place by scalar
+    Vector4& operator/=(T scalar) {
+        x /= scalar;
+        y /= scalar;
+        z /= scalar;
+        w /= scalar;
+        return *this;
+    }
+
+    // divide by vector
+    Vector4 operator/(const Vector4& vector) const {
+        return Vector4(x / vector.x, y / vector.y, z / vector.z, w / vector.w);
+    }
+
+    // divide in place by vector
+    Vector4& operator/=(const Vector4& vector) {
+        x /= vector.x;
+        y /= vector.y;
+        z /= vector.z;
+        w /= vector.w;
+        return *this;
+    }
+
+#pragma endregion
+
+#pragma region boolean operations
+
+    // equal to
+    bool operator==(const Vector4& other) const {
+        return x == other.x && y == other.y && z == other.z && w == other.w;
+    }
+
+    // not equal to
+    bool operator!=(const Vector4& other) const {
+        return x != other.x || y != other.y || z != other.z || w != other.w;
+    }
+
+    // less than
+    bool operator<(const Vector4& other) const {
+        return std::tie(x, y, z, w) < std::tie(other.x, other.y, other.z, other.w);
+    }
+
+    // greater than
+    bool operator>(const Vector4& other) const {
+        return std::tie(x, y, z, w) > std::tie(other.x, other.y, other.z, other.w);
+    }
+
+    // less than or equal to
+    bool operator<=(const Vector4& other) const {
+        return std::tie(x, y, z, w) <= std::tie(other.x, other.y, other.z, other.w);
+    }
+
+    // greater than or equal to
+    bool operator>=(const Vector4& other) const {
+        return std::tie(x, y, z, w) >= std::tie(other.x, other.y, other.z, other.w);
+    }
+
+#pragma endregion
+
+#pragma region functions
+
+    T length() const {
+        return std::sqrt(static_cast<T>(x * x + y * y + z * z + w * w));
+    }
+
+    Vector4 normalize() const {
+        T len = length();
+        if (len == static_cast<T>(0)) return *this;
+        return Vector4<T>(x / len, y / len, z / len, w / len);
+    }
+
+    T dot(const Vector4& other) const {
+        return x * other.x + y * other.y + z * other.z + w * other.w;
+    }
+
+    // Vector4 cross(const Vector4& other) const {
+    //     return Vector4(
+    //         y * other.z - z * other.y,
+    //         z * other.x - x * other.z,
+    //         x * other.y - y * other.x,
+    //         0
+    //     );
+    // }
+
+#pragma endregion
+};

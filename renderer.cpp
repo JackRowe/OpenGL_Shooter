@@ -19,6 +19,8 @@ renderer::renderer(int argc, char* argv[]) {
 
 	start();
 
+	glEnable(GL_LIGHTING);
+
 	glutTimerFunc(REFRESH_RATE, GLUT::loop, REFRESH_RATE);
 	glutKeyboardFunc(GLUT::keyboardDown);
 	glutKeyboardUpFunc(GLUT::keyboardUp);
