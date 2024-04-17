@@ -38,6 +38,18 @@ renderer::renderer(int argc, char* argv[]) {
 
 renderer::~renderer() {
 	// add delete loops for meshes objects and textures
+	for (int i = 0; i < meshes.size(); i++) {
+		delete meshes[i];
+	}
+
+	for (int i = 0; i < textures.size(); i++) {
+		delete textures[i];
+	}
+
+	for (int i = 0; i < objects.size(); i++) {
+		// loop thru each object and clear children
+		delete objects[i];
+	}
 }
 
 void renderer::start() {
