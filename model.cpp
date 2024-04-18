@@ -27,7 +27,7 @@ void model::draw() {
 	glMaterialfv(GL_FRONT, GL_AMBIENT, _material->ambient);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, _material->diffuse);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, _material->specular);
-	//glMaterialfv(GL_FRONT, GL_POSITION, whiteLight->position);
+	glMaterialfv(GL_FRONT, GL_SHININESS, &_material->shininess);
 
 	_texture == nullptr ? glDisable(GL_TEXTURE_2D) : glEnable(GL_TEXTURE_2D);
 

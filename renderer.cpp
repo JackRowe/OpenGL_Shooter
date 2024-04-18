@@ -50,6 +50,11 @@ renderer::~renderer() {
 		// loop thru each object and clear children
 		delete objects[i];
 	}
+
+	for (int i = 0; i < lights.size(); i++) {
+		// loop thru each object and clear children
+		delete lights[i];
+	}
 }
 
 void renderer::start() {
@@ -58,6 +63,8 @@ void renderer::start() {
 
 	cam = new camera;
 	controller = new input;
+
+	glutSetCursor(GLUT_CURSOR_NONE);
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
@@ -80,14 +87,29 @@ void renderer::start() {
 		0.0f
 	);
 
-	glLightfv(GL_LIGHT0, GL_AMBIENT, whiteLight->ambient);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, whiteLight->diffuse);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, whiteLight->specular);
-	glLightfv(GL_LIGHT0, GL_POSITION, whiteLight->position);
+	lights.push_back(new light{
+		GL_LIGHT0,
+		{1.0f, 1.0f, 1.0f, 0.0f},
+		{1.0f, 1.0f, 1.0f, 0.0f},
+		{0.5f, 0.5f, 0.5f, 1.0f},
+		{1.0f, 1.0f, 1.0f, 0.0f},
+	});
+
+	glLightfv(lights[0]->id, GL_AMBIENT, lights[0]->ambient);
+	glLightfv(lights[0]->id, GL_DIFFUSE, lights[0]->diffuse);
+	glLightfv(lights[0]->id, GL_SPECULAR, lights[0]->specular);
+	glLightfv(lights[0]->id, GL_POSITION, lights[0]->position);
+
+	materials.push_back(new material{
+		{1.0f, 1.0f, 1.0f, 1.0f},
+		{1.0f, 1.0f, 1.0f, 1.0f},
+		{1.0f, 1.0f, 1.0f, 1.0f},
+		100.0f,
+	});
 
 	meshes.push_back(new mesh("Assets/cube.obj"));
 	textures.push_back(new texture("Assets/cube.png"));
-	objects.push_back(new model(meshes[0], textures[0], shiny, { 10.0f, 0.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], {10.0f, 0.0f, 0.0f}));
 }
 
 void drawVector(std::vector<object*> objs)
@@ -130,6 +152,10 @@ float lerp(float a, float b, float t) {
 }
 
 void renderer::update(int deltaTime) {
+	if (controller->getKeyState(27)) {
+		exit(0);
+	}
+
 	glutPostRedisplay();
 	glLoadIdentity();
 
@@ -147,6 +173,8 @@ void renderer::update(int deltaTime) {
 	cam->update(controller->getInputVector());
 
 	updateVector(objects);
+
+	glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 }
 
 void renderer::keyboard(unsigned char key, int x, int y, bool state) {

@@ -27,23 +27,9 @@ private:
 	std::vector<object*> objects = {};
 	std::vector<mesh*> meshes = {};
 	std::vector<texture*> textures = {};
-	std::vector<light> lights = {};
+	std::vector<light*> lights = {};
+	std::vector<material*> materials = {};
 public:
-	light* whiteLight = new light{
-		GL_LIGHT0,
-		{1.0f, 1.0f, 1.0f, 0.0f},
-		{1.0f, 1.0f, 1.0f, 0.0f},
-		{0.5f, 0.5f, 0.5f, 1.0f},
-		{1.0f, 1.0f, 1.0f, 0.0f},
-	};
-
-	material* shiny = new material{
-		{1.0f, 1.0f, 1.0f, 1.0f},
-		{1.0f, 1.0f, 1.0f, 1.0f},
-		{1.0f, 1.0f, 1.0f, 1.0f},
-		1,
-	};
-
 	renderer() {};
 	renderer(int argc, char* argv[]);
 	~renderer();
