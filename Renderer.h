@@ -27,10 +27,12 @@ private:
 	std::vector<object*> objects = {};
 	std::vector<mesh*> meshes = {};
 	std::vector<texture*> textures = {};
+	std::vector<light> lights = {};
 public:
 	light* whiteLight = new light{
-		{0.2f, 0.2f, 0.2f, 1.0f},
-		{0.7f, 0.7f, 0.7f, 1.0f},
+		GL_LIGHT0,
+		{1.0f, 1.0f, 1.0f, 0.0f},
+		{1.0f, 1.0f, 1.0f, 0.0f},
 		{0.5f, 0.5f, 0.5f, 1.0f},
 		{1.0f, 1.0f, 1.0f, 0.0f},
 	};
@@ -39,7 +41,7 @@ public:
 		{1.0f, 1.0f, 1.0f, 1.0f},
 		{1.0f, 1.0f, 1.0f, 1.0f},
 		{1.0f, 1.0f, 1.0f, 1.0f},
-		100.0,
+		1,
 	};
 
 	renderer() {};

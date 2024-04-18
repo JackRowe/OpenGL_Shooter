@@ -1,8 +1,7 @@
 #pragma once
 
-#include "vectors.h"
-
 struct light {
+	int id;
 	float ambient[4];
 	float diffuse[4];
 	float specular[4];

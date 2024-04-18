@@ -130,7 +130,6 @@
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="glut.cpp" />
     <ClCompile Include="input.cpp" />
-    <ClCompile Include="light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="material.cpp" />
     <ClCompile Include="mesh.cpp" />
@@ -144,7 +143,6 @@
     <ClInclude Include="constants.h" />
     <ClInclude Include="glut.h" />
     <ClInclude Include="input.h" />
-    <ClInclude Include="light.h" />
     <ClInclude Include="material.h" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="model.h" />

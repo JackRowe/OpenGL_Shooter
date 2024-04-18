@@ -63,9 +63,6 @@
     <ClCompile Include="input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="light.cpp">
-      <Filter>Source Files\objects</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renderer.h">
@@ -106,9 +103,6 @@
     </ClInclude>
     <ClInclude Include="input.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="light.h">
-      <Filter>Header Files\objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
