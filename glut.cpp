@@ -3,6 +3,7 @@
 namespace GLUT {
 	namespace {
 		renderer* _renderer = nullptr;
+		int lastTimeFromStart = 0;
 	}
 
 	void start(renderer* newRenderer) {
@@ -12,12 +13,19 @@ namespace GLUT {
 	void loop(int refreshRate) {
 		if (_renderer == nullptr) return;
 
-		int deltaTime = glutGet(GLUT_ELAPSED_TIME);
+		int timeFromStart = glutGet(GLUT_ELAPSED_TIME);
+		int deltaTime = timeFromStart - lastTimeFromStart;
+		lastTimeFromStart = timeFromStart;
+
 		_renderer->display(deltaTime);
 		_renderer->update(deltaTime);
-		deltaTime = glutGet(GLUT_ELAPSED_TIME) - deltaTime;
 
 		glutTimerFunc(refreshRate - deltaTime, GLUT::loop, refreshRate);
+	}
+
+	void idle() {
+		if (_renderer == nullptr) return;
+		_renderer->idle();
 	}
 
 	void keyboardDown(unsigned char key, int x, int y) {

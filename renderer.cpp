@@ -20,6 +20,7 @@ renderer::renderer(int argc, char* argv[]) {
 	start();
 
 	glutTimerFunc(REFRESH_RATE, GLUT::loop, REFRESH_RATE);
+	glutIdleFunc(GLUT::idle);
 	glutKeyboardFunc(GLUT::keyboardDown);
 	glutKeyboardUpFunc(GLUT::keyboardUp);
 	glutMotionFunc(GLUT::mouseMotion);
@@ -109,7 +110,17 @@ void renderer::start() {
 
 	meshes.push_back(new mesh("Assets/cube.obj"));
 	textures.push_back(new texture("Assets/cube.png"));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], {10.0f, 0.0f, 0.0f}));
+
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			for (int k = 0; k < 10; k++)
+			{
+				objects.push_back(new model(meshes[0], textures[0], materials[0], { (float)i * 2.0f, (float)j * 2.0f, (float)k * 2.0f }));
+			}
+		}
+	}
 }
 
 void drawVector(std::vector<object*> objs)
@@ -156,25 +167,35 @@ void renderer::update(int deltaTime) {
 		exit(0);
 	}
 
+	if (controller->getKeyState(9)) {
+		mouseLocked = !mouseLocked;
+
+		mouseLocked ? glutSetCursor(GLUT_CURSOR_NONE) : glutSetCursor(GLUT_CURSOR_RIGHT_ARROW);
+	}
+
 	glutPostRedisplay();
 	glLoadIdentity();
 
-	if (controller->getMouseState(0))
-	{
-		Vector2<int> mouseDelta = controller->getMouseDelta();
-		float pitch = cam->getPitch();
-		float yaw = cam->getYaw();
-
-		cam->setPitch(lerp(pitch, pitch - ((float)mouseDelta.y), 0.5f));
-		cam->setYaw(lerp(yaw, yaw + ((float)mouseDelta.x), 0.5f));
-	}
-
-	controller->setMouseDelta({ 0 });
+	float pitch = cam->getPitch();
+	float yaw = cam->getYaw();
+	//std::cout << pitch << ", " << yaw << std::endl;
 	cam->update(controller->getInputVector());
 
 	updateVector(objects);
 
-	glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	if(mouseLocked) glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	controller->setMouseDelta({ 0 });
+}
+
+void renderer::idle() {
+	//std::cout << "idle" << std::endl;
+	Vector2<int> mouseDelta = controller->getMouseDelta();
+	float pitch = cam->getPitch();
+	float yaw = cam->getYaw();
+
+	std::cout << mouseDelta.x << ", " << mouseDelta.y << std::endl;
+	cam->setPitch(lerp(pitch, pitch - (float)mouseDelta.y, 1.0f));
+	cam->setYaw(lerp(yaw, yaw + (float)mouseDelta.x, 1.0f));
 }
 
 void renderer::keyboard(unsigned char key, int x, int y, bool state) {

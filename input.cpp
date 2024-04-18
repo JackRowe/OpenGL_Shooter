@@ -2,7 +2,6 @@
 
 void input::setKeyState(unsigned char key, bool state) {
 	if (keyStates[key] == state) return;
-	std::cout << (int)key << std::endl;
 	keyStates[key] = state;
 	//std::cout << key << " | " << state << std::endl;
 

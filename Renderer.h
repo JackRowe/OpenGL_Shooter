@@ -21,6 +21,7 @@ class renderer
 {
 private:
 	int frame = 0;
+	bool mouseLocked = true;
 	input* controller;
 	camera* cam;
 
@@ -37,6 +38,7 @@ public:
 	void start();
 	void display(int deltaTime);
 	void update(int deltaTime);
+	void idle();
 	void keyboard(unsigned char key, int x, int y, bool state);
 	void mouseButton(int button, int state, int x, int y);
 	void mouseMotion(int x, int y);
