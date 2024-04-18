@@ -175,12 +175,6 @@ void renderer::update(int deltaTime) {
 		exit(0);
 	}
 
-	if (controller->getKeyState(9)) {
-		mouseLocked = !mouseLocked;
-
-		mouseLocked ? glutSetCursor(GLUT_CURSOR_NONE) : glutSetCursor(GLUT_CURSOR_RIGHT_ARROW);
-	}
-
 	glutPostRedisplay();
 	glLoadIdentity();
 
@@ -196,7 +190,7 @@ void renderer::update(int deltaTime) {
 	// Update other objects
 	updateVector(objects);
 
-	if(mouseLocked) glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	controller->setMouseDelta({ 0 });
 }
 
