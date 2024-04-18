@@ -111,16 +111,24 @@ void renderer::start() {
 	meshes.push_back(new mesh("Assets/cube.obj"));
 	textures.push_back(new texture("Assets/cube.png"));
 
-	for (int i = 0; i < 10; i++)
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 0.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 0.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, 10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, -10.0f }));
+
+	for (int i = 0; i < 1; i++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < 1; j++)
 		{
-			for (int k = 0; k < 10; k++)
+			for (int k = 0; k < 1; k++)
 			{
 				objects.push_back(new model(meshes[0], textures[0], materials[0], { (float)i * 2.0f, (float)j * 2.0f, (float)k * 2.0f }));
 			}
 		}
 	}
+
+	cam->setPitch(0);
+	cam->setYaw(0);
 }
 
 void drawVector(std::vector<object*> objs)
@@ -176,11 +184,16 @@ void renderer::update(int deltaTime) {
 	glutPostRedisplay();
 	glLoadIdentity();
 
+	Vector2<int> mouseDelta = controller->getMouseDelta();
 	float pitch = cam->getPitch();
 	float yaw = cam->getYaw();
-	//std::cout << pitch << ", " << yaw << std::endl;
+
+	cam->setPitch(pitch + (static_cast<float>(mouseDelta.y) * CAMERA_SENSITIVITY * static_cast<float>(deltaTime) / 1000.0f));
+	cam->setYaw(yaw - (static_cast<float>(mouseDelta.x) * CAMERA_SENSITIVITY * static_cast<float>(deltaTime) / 1000.0f));
+
 	cam->update(controller->getInputVector());
 
+	// Update other objects
 	updateVector(objects);
 
 	if(mouseLocked) glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
@@ -189,13 +202,6 @@ void renderer::update(int deltaTime) {
 
 void renderer::idle() {
 	//std::cout << "idle" << std::endl;
-	Vector2<int> mouseDelta = controller->getMouseDelta();
-	float pitch = cam->getPitch();
-	float yaw = cam->getYaw();
-
-	std::cout << mouseDelta.x << ", " << mouseDelta.y << std::endl;
-	cam->setPitch(lerp(pitch, pitch - (float)mouseDelta.y, 1.0f));
-	cam->setYaw(lerp(yaw, yaw + (float)mouseDelta.x, 1.0f));
 }
 
 void renderer::keyboard(unsigned char key, int x, int y, bool state) {
