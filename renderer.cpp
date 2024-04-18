@@ -38,7 +38,6 @@ renderer::renderer(int argc, char* argv[]) {
 }
 
 renderer::~renderer() {
-	// add delete loops for meshes objects and textures
 	for (int i = 0; i < meshes.size(); i++) {
 		delete meshes[i];
 	}
@@ -53,8 +52,11 @@ renderer::~renderer() {
 	}
 
 	for (int i = 0; i < lights.size(); i++) {
-		// loop thru each object and clear children
 		delete lights[i];
+	}
+
+	for (int i = 0; i < materials.size(); i++) {
+		delete materials[i];
 	}
 }
 
@@ -116,17 +118,18 @@ void renderer::start() {
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, 10.0f }));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, -10.0f }));
 
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 0; i++)
 	{
-		for (int j = 0; j < 1; j++)
+		for (int j = 0; j < 0; j++)
 		{
-			for (int k = 0; k < 1; k++)
+			for (int k = 0; k < 0; k++)
 			{
 				objects.push_back(new model(meshes[0], textures[0], materials[0], { (float)i * 2.0f, (float)j * 2.0f, (float)k * 2.0f }));
 			}
 		}
 	}
-
+	glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	controller->setMouseDelta({ 0 });
 	cam->setPitch(0);
 	cam->setYaw(0);
 }
@@ -190,8 +193,8 @@ void renderer::update(int deltaTime) {
 	// Update other objects
 	updateVector(objects);
 
-	glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
-	controller->setMouseDelta({ 0 });
+	//controller->setMouseDelta({ 0 });
+	controller->setIgnoreMouseFlag(true);
 }
 
 void renderer::idle() {
@@ -207,5 +210,17 @@ void renderer::mouseButton(int button, int state, int x, int y) {
 }
 
 void renderer::mouseMotion(int x, int y) {
+
+	std::cout << x << ", " << y << std::endl;
 	controller->updateMouseMotion(x, y);
+
+	glutMotionFunc(nullptr);
+	glutPassiveMotionFunc(nullptr);
+
+	glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	controller->setIgnoreMouseFlag(false);
+	controller->setMouseDelta({ 0 });
+
+	glutMotionFunc(GLUT::mouseMotion);
+	glutPassiveMotionFunc(GLUT::mouseMotion);
 }

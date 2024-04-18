@@ -3,12 +3,14 @@
 #include <iostream>
 
 #include "vectors.h"
+#include "constants.h"
 
 class input
 {
 private:
 	bool keyStates[256] = { 0 };
 	bool mouseStates[5] = { 0 };
+	bool ignoreMouseFlag = false;
 
 	Vector2<int> mouseDelta = { 0 };
 	Vector2<int> mousePosition = { 0 };
@@ -28,5 +30,7 @@ public:
 
 	Vector2<int> getMouseDelta() { return mouseDelta; };
 	void setMouseDelta(const Vector2<int>& newMouseDelta) { mouseDelta = newMouseDelta; };
+
+	void setIgnoreMouseFlag(const bool& flag) { ignoreMouseFlag = flag; };
 };
 

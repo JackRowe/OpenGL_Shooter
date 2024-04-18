@@ -19,10 +19,41 @@ void input::updateInputVector() {
 void input::setMouseState(int button, int state, int x, int y) {
 	mouseStates[tolower(button)] = !state;
 	//std::cout << button << " | " << state << std::endl;
-	mouseDelta = { 0, 0 };
+	//mouseDelta = { 0, 0 };
 }
 
 void input::updateMouseMotion(int x, int y) {
-	mouseDelta = { mousePosition.x - x, mousePosition.y - y };
+
+	// reset flag
+	
+	//if (x == WINDOW_WIDTH / 2 && y == WINDOW_HEIGHT / 2) {
+	//	// at centre of the screen
+	//	std::cout << "ignore: " << x - mousePosition.x << ", " << y - mousePosition.y << " | new: (" << x << ", " << y << ") | old: (" << mousePosition.x << ", " << mousePosition.y << ")" << std::endl;
+	//	mouseDelta = { 0 };
+	//}
+	//else if ((x - mousePosition.x) + x == WINDOW_WIDTH / 2 && (y - mousePosition.y) + y == WINDOW_HEIGHT / 2) {
+	//	// wants to go to centre of the screen
+	//	std::cout << "ignore: " << x - mousePosition.x << ", " << y - mousePosition.y << " | new: (" << x << ", " << y << ") | old: (" << mousePosition.x << ", " << mousePosition.y << ") | ???: (" << (x - mousePosition.x) + x << ", " << (y - mousePosition.y) + y << ")" << std::endl;
+	//	mouseDelta = { 0 };
+	//}
+	//else {
+	//	// apply
+	//	std::cout << "apply: " << x - mousePosition.x << ", " << y - mousePosition.y << " | new: (" << x << ", " << y << ") | old: (" << mousePosition.x << ", " << mousePosition.y << ")" << std::endl;
+	////	mouseDelta = { x - mousePosition.x, y - mousePosition.y };
+	//}
+
+	//if (!ignoreMouseFlag) {
+	//	mouseDelta = { 0 };
+	//}
+	//else {
+	//	mouseDelta = { x - mousePosition.x, y - mousePosition.y };
+	//}
+
+	//if (mouseDelta.x > 10 || mouseDelta.y > 10)
+	//{
+	//	mouseDelta.x = 0;
+	//	mouseDelta.y = 0;
+	//}
+	mouseDelta = { x - mousePosition.x, y - mousePosition.y };
 	mousePosition = { x, y };
 }
