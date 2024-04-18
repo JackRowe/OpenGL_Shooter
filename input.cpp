@@ -17,7 +17,7 @@ void input::updateInputVector() {
 }
 
 void input::setMouseState(int button, int state, int x, int y) {
-	mouseStates[button] = !state;
+	mouseStates[tolower(button)] = !state;
 	//std::cout << button << " | " << state << std::endl;
 	mouseDelta = { 0, 0 };
 }
