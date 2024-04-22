@@ -49,11 +49,16 @@ void input::updateMouseMotion(int x, int y) {
 	//	mouseDelta = { x - mousePosition.x, y - mousePosition.y };
 	//}
 
-	//if (mouseDelta.x > 10 || mouseDelta.y > 10)
+	//if (mousedelta.x > 10 || mousedelta.y > 10)
 	//{
-	//	mouseDelta.x = 0;
-	//	mouseDelta.y = 0;
+	//	mousedelta.x = 0;
+	//	mousedelta.y = 0;
 	//}
+
 	mouseDelta = { x - mousePosition.x, y - mousePosition.y };
 	mousePosition = { x, y };
+
+	/*if (abs(mousePosition.x - WINDOW_WIDTH) >= WINDOW_WIDTH / 2 || abs(mousePosition.y - WINDOW_HEIGHT) >= WINDOW_HEIGHT / 2) {
+		glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	}*/
 }

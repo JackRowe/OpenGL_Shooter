@@ -1,7 +1,11 @@
 #pragma once
 
+#include <Windows.h>
+#include <gl/GL.h>
+#include <gl/GLU.h>
 #include <iostream>
 
+#include "GL\freeglut.h"
 #include "vectors.h"
 #include "constants.h"
 
