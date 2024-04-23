@@ -11,7 +11,9 @@ void model::draw() {
 
 	std::vector<Vector3<float>>* vertices = _mesh->getVertices();
 	std::vector<Vector2<float>>* uvs = _mesh->getUVs();
+	std::vector<Vector3<float>>* normals = _mesh->getNormals();
 	std::vector<std::vector<Vector3<int>>>* faces = _mesh->getFaces();
+	
 
 	const Vector3<float>& position = getPosition();
 	const Vector3<float>& rotation = getRotation();
@@ -41,8 +43,10 @@ void model::draw() {
 			Vector3<int> index = face[j];
 			Vector3<float> vertex = vertices->at(index.x - 1);
 			Vector2<float> uv = uvs->at(index.y - 1);
+			Vector3<float> normal = normals->at(index.z - 1);
 
 			glTexCoord2f(uv.x, uv.y);
+			glNormal3f(normal.x, normal.y, normal.z);
 			glVertex3f(vertex.x * scale.x, vertex.y * scale.y, vertex.z * scale.z);
 		}
 

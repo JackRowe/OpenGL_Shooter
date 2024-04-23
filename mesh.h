@@ -16,6 +16,7 @@ private:
 	std::vector<Vector3<float>> normals = { {} };
 	std::vector<Vector2<float>> uvs = { {} };
 	std::vector<std::vector<Vector3<int>>> faces = { { {} } };
+
 public:
 	enum objHeader {
 		none,
@@ -46,6 +47,7 @@ public:
 
 	std::vector<Vector3<float>>* getVertices() { return &vertices; };
 	std::vector<Vector2<float>>* getUVs() { return &uvs; };
+	std::vector<Vector3<float>>* getNormals() { return &normals; };
 	std::vector<std::vector<Vector3<int>>>* getFaces() { return &faces; };
 
 	void clean();
