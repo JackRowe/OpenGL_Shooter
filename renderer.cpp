@@ -175,16 +175,13 @@ void renderer::update(int deltaTime) {
 	float pitch = cam->getPitch();
 	float yaw = cam->getYaw();
 
-	cam->setPitch(pitch + (static_cast<float>(mouseDelta.y) * CAMERA_SENSITIVITY * static_cast<float>(deltaTime) / 1000.0f));
-	cam->setYaw(yaw - (static_cast<float>(mouseDelta.x) * CAMERA_SENSITIVITY * static_cast<float>(deltaTime) / 1000.0f));
+	/*cam->setPitch(pitch + (static_cast<float>(mouseDelta.y) * CAMERA_SENSITIVITY * static_cast<float>(deltaTime) / 1000.0f));
+	cam->setYaw(yaw - (static_cast<float>(mouseDelta.x) * CAMERA_SENSITIVITY * static_cast<float>(deltaTime) / 1000.0f));*/
 
 	cam->update(controller->getInputVector());
 
 	// Update other objects
 	updateVector(objects);
-
-	controller->setMouseDelta({ 0 });
-	controller->setIgnoreMouseFlag(true);
 }
 
 void renderer::idle() {
