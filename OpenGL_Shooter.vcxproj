@@ -135,6 +135,7 @@
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="model.cpp" />
     <ClCompile Include="object.cpp" />
+    <ClCompile Include="physicsObject.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="texture.cpp" />
   </ItemGroup>
@@ -147,6 +148,7 @@
     <ClInclude Include="mesh.h" />
     <ClInclude Include="model.h" />
     <ClInclude Include="object.h" />
+    <ClInclude Include="physicsObject.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="structures.h" />

@@ -175,13 +175,27 @@ void renderer::update(int deltaTime) {
 	float pitch = cam->getPitch();
 	float yaw = cam->getYaw();
 
-	/*cam->setPitch(pitch + (static_cast<float>(mouseDelta.y) * CAMERA_SENSITIVITY * static_cast<float>(deltaTime) / 1000.0f));
-	cam->setYaw(yaw - (static_cast<float>(mouseDelta.x) * CAMERA_SENSITIVITY * static_cast<float>(deltaTime) / 1000.0f));*/
+	cam->setPitch(pitch - (static_cast<float>(mouseDelta.y) * CAMERA_SENSITIVITY * static_cast<float>(deltaTime) / 1000.0f));
+	cam->setYaw(yaw + (static_cast<float>(mouseDelta.x) * CAMERA_SENSITIVITY * static_cast<float>(deltaTime) / 1000.0f));
+
+	Vector2<int> MousePosition = controller->getMousePosition();
+
+	if (MousePosition.x < MOUSE_BORDER || MousePosition.x > WINDOW_WIDTH - MOUSE_BORDER) {
+		controller->setMouseDelta({ 0 });
+		controller->setMousePosition({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
+		glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	}
+	else if (MousePosition.y < MOUSE_BORDER || MousePosition.y > WINDOW_HEIGHT - MOUSE_BORDER) {
+		controller->setMouseDelta({ 0 });
+		controller->setMousePosition({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
+		glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
+	}
 
 	cam->update(controller->getInputVector());
 
 	// Update other objects
 	updateVector(objects);
+	controller->setMouseDelta({ 0 });
 }
 
 void renderer::idle() {

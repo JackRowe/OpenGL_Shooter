@@ -32,7 +32,9 @@ public:
 
 	void updateMouseMotion(int x, int y);
 
+	Vector2<int> getMousePosition() { return mousePosition; };
 	Vector2<int> getMouseDelta() { return mouseDelta; };
+	void setMousePosition(const Vector2<int>& newMousePosition) { mousePosition = newMousePosition; };
 	void setMouseDelta(const Vector2<int>& newMouseDelta) { mouseDelta = newMouseDelta; };
 
 	void setIgnoreMouseFlag(const bool& flag) { ignoreMouseFlag = flag; };
