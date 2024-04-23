@@ -117,6 +117,8 @@ void renderer::start() {
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 0.0f, 0.0f }));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, 10.0f }));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, -10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 10.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, -10.0f, 0.0f }));
 
 	glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	controller->setMouseDelta({ 0 });
