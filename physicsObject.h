@@ -1,5 +1,8 @@
 #pragma once
-class physicsObject
+
+#include "object.h"
+
+class physicsObject : public object
 {
 };
 
