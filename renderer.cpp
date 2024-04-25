@@ -114,11 +114,33 @@ void renderer::start() {
 	textures.push_back(new texture("Assets/cube.png"));
 
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 0.0f, 0.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 0.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, 10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 10.0f, 10.0f }));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, 10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 0.0f, 10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 00.0f, 10.0f, 00.0f }));
+
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 10.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, -10.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 10.0f, -10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, -10.0f, 10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 0.0f, -10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 0.0f, 10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 10.0f, 10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, -10.0f, 10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 10.0f, -10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, -10.0f, -10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, -10.0f, 10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, -10.0f }));
+
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 0.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, -10.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, -10.0f, -10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, -10.0f, -10.0f }));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, -10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 10.0f, 0.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, -10.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 0.0f, -10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 00.0f, -10.0f, 00.0f }));
 
 	glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	controller->setMouseDelta({ 0 });
@@ -182,16 +204,12 @@ void renderer::update(int deltaTime) {
 
 	Vector2<int> MousePosition = controller->getMousePosition();
 
-	if (MousePosition.x < MOUSE_BORDER || MousePosition.x > WINDOW_WIDTH - MOUSE_BORDER) {
+	if ((MousePosition.x < MOUSE_BORDER || MousePosition.x > WINDOW_WIDTH - MOUSE_BORDER) || (MousePosition.y < MOUSE_BORDER || MousePosition.y > WINDOW_HEIGHT - MOUSE_BORDER)) {
 		controller->setMouseDelta({ 0 });
 		controller->setMousePosition({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
 		glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	}
-	else if (MousePosition.y < MOUSE_BORDER || MousePosition.y > WINDOW_HEIGHT - MOUSE_BORDER) {
-		controller->setMouseDelta({ 0 });
-		controller->setMousePosition({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
-		glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
-	}
+
 
 	cam->update(controller->getInputVector());
 
