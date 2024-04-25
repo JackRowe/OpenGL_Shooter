@@ -84,7 +84,7 @@ bool mesh::load(const std::string& path) {
 				// loop over each component of the normal and add it to normal before removing that component from the line
 				for (int i = 0; i < 3; i++)
 				{
-					std::string s = line.substr(0, line.find_first_of(' '));
+					std::string s = line.substr(0, line.find_first_of(' ')); 
 					if (i == 0) {
 						normal.x = std::stof(s);
 					}

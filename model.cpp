@@ -58,5 +58,12 @@ void model::draw() {
 }
 
 void model::update() {
-	
+	if (getAnchored()) return;
+
+	Vector3<float> position = getPosition();
+	Vector3<float> velocity = getVeloicty();
+
+	setPosition(position.x + velocity.x, position.y + velocity.y, position.z + velocity.z);
+
+	setVelocity(velocity.x, velocity.y - 0.01f, velocity.z);
 }
