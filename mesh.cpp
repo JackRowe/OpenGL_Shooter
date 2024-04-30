@@ -42,7 +42,7 @@ bool mesh::load(const std::string& path) {
 				// loop over each component of the vertex and add it to vertex before removing that component from the line
 				for (int i = 0; i < 3; i++)
 				{
-					std::string s = line.substr(0, line.find_first_of(' '));
+					std::string s =		line.substr(0, line.find_first_of(' '));
 					if (i == 0){
 						vertex.x = std::stof(s);
 					}
@@ -113,7 +113,7 @@ bool mesh::load(const std::string& path) {
 					Vector3<int> index = { 0 };
 					// loop over each component of the index and add it to index before removing that component from the line
 					for (int i = 0; i < 4; i++)
-					{
+					{	
 						std::string s = tempLine.substr(0, line.find_first_of('/') + 1);
 
 						if (s[0] == ' ' || s.size() <= 0) { continue; }

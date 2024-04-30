@@ -17,7 +17,7 @@ private:
 	object* parent = nullptr;
 	std::vector<object*> children = {};
 
-	bool anchored = false;
+	bool anchored = true;
 public:
 	object(
 		const Vector3<float>& newPosition = { 0.0f },

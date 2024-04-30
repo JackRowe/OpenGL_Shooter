@@ -92,10 +92,10 @@ void renderer::start() {
 
 	lights.push_back(new light{
 		GL_LIGHT0,
-		{1.0f, 1.0f, 1.0f, 0.0f},
-		{1.0f, 1.0f, 1.0f, 0.0f},
+		{1.0f, 0.2f, 0.2f, 1.0f},
+		{1.0f, 0.8f, 0.8f, 1.0f},
 		{0.5f, 0.5f, 0.5f, 1.0f},
-		{1.0f, 1.0f, 1.0f, 0.0f},
+		{0.0f, 0.0f, 1.0f, 0.0f},
 	});
 
 	glLightfv(lights[0]->id, GL_AMBIENT, lights[0]->ambient);
@@ -104,11 +104,16 @@ void renderer::start() {
 	glLightfv(lights[0]->id, GL_POSITION, lights[0]->position);
 
 	materials.push_back(new material{
-		{1.0f, 1.0f, 1.0f, 1.0f},
-		{1.0f, 1.0f, 1.0f, 1.0f},
+		{0.8f, 0.05f, 0.05f, 1.0f},
+		{0.8f, 0.05f, 0.05f, 1.0f},
 		{1.0f, 1.0f, 1.0f, 1.0f},
 		100.0f,
 	});
+
+	glMaterialfv(GL_FRONT, GL_AMBIENT, materials[0]->ambient);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, materials[0]->diffuse);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, materials[0]->specular);
+	glMaterialfv(GL_FRONT, GL_SHININESS, &materials[0]->shininess);
 
 	meshes.push_back(new mesh("Assets/cube.obj"));
 	textures.push_back(new texture("Assets/cube.png"));
