@@ -26,10 +26,10 @@ void model::draw() {
 	glRotatef(rotation.y, 0.0f, 1.0f, 0.0f);
 	glRotatef(rotation.z, 0.0f, 0.0f, 1.0f);
 
-	/*glMaterialfv(GL_FRONT, GL_AMBIENT, _material->ambient);
+	glMaterialfv(GL_FRONT, GL_AMBIENT, _material->ambient);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, _material->diffuse);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, _material->specular);
-	glMaterialfv(GL_FRONT, GL_SHININESS, &_material->shininess);*/
+	glMaterialfv(GL_FRONT, GL_SHININESS, &_material->shininess);
 
 	_texture == nullptr ? glDisable(GL_TEXTURE_2D) : glEnable(GL_TEXTURE_2D);
 

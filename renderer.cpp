@@ -92,8 +92,8 @@ void renderer::start() {
 
 	lights.push_back(new light{
 		GL_LIGHT0,
-		{1.0f, 0.2f, 0.2f, 1.0f},
-		{1.0f, 0.8f, 0.8f, 1.0f},
+		{1.0f, 1.0f, 1.0f, 1.0f},
+		{1.0f, 1.0f, 1.0f, 1.0f},
 		{0.5f, 0.5f, 0.5f, 1.0f},
 		{0.0f, 0.0f, 1.0f, 0.0f},
 	});
@@ -104,16 +104,11 @@ void renderer::start() {
 	glLightfv(lights[0]->id, GL_POSITION, lights[0]->position);
 
 	materials.push_back(new material{
-		{0.8f, 0.05f, 0.05f, 1.0f},
-		{0.8f, 0.05f, 0.05f, 1.0f},
+		{1.0f, 1.0f, 1.0f, 1.0f},
+		{1.0f, 1.0f, 1.0f, 1.0f},
 		{1.0f, 1.0f, 1.0f, 1.0f},
 		100.0f,
 	});
-
-	glMaterialfv(GL_FRONT, GL_AMBIENT, materials[0]->ambient);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, materials[0]->diffuse);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, materials[0]->specular);
-	glMaterialfv(GL_FRONT, GL_SHININESS, &materials[0]->shininess);
 
 	meshes.push_back(new mesh("Assets/cube.obj"));
 	textures.push_back(new texture("Assets/cube.png"));
@@ -165,10 +160,36 @@ void drawVector(std::vector<object*> objs)
 	}
 }
 
+void drawString(const char* text, Vector3<float>* position, Vector3<float>* colour) {
+	glPushMatrix();
+	glTranslatef(position->x, position->y, position->z);
+	glRasterPos2f(0.0f, 0.0f);
+	glColor3f(colour->x, colour->y, colour->z);
+	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)text);
+	glPopMatrix();
+}
+
 void renderer::display(int deltaTime) {
 	// clear the screen
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glDisable(GL_LIGHTING);
+
+	Vector3<float> camPos = cam->getPosition();
+	Vector3<float> camRot = cam->getRotation();
+
+	std::cout << "display" << std::endl;
+
+	std::string a = std::to_string(1000.0f / deltaTime);
+	Vector3<float>  pos = camPos + camRot;
+	Vector3<float>  col = { 1.0f, 0.0f, 0.0f };
+
+	std::cout << camPos.x << ", " << camPos.y << ", " << camPos.z << std::endl;
+
+	drawString("HELP", &pos, &col);
+
+	glEnable(GL_LIGHTING);
 
 	drawVector(objects);
 

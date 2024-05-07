@@ -37,10 +37,10 @@ public:
 
 	void setAnchored(bool state) { anchored = state; };
 
-	const Vector3<float>& getPosition() const { return position; }
-	const Vector3<float>& getRotation() const { return rotation; }
-	const Vector3<float>& getScale() const { return scale; }
-	const Vector3<float>& getVeloicty() const { return velocity; }
+	Vector3<float> getPosition() { return position; }
+	Vector3<float> getRotation(){ return rotation; }
+	Vector3<float> getScale() { return scale; }
+	Vector3<float> getVeloicty() { return velocity; }
 
 	const bool getAnchored() const { return anchored; };
 
