@@ -92,9 +92,9 @@ void renderer::start() {
 
 	lights.push_back(new light{
 		GL_LIGHT0,
-		{1.0f, 1.0f, 1.0f, 1.0f},
-		{1.0f, 1.0f, 1.0f, 1.0f},
-		{0.5f, 0.5f, 0.5f, 1.0f},
+		{0.5f, 0.5f, 1.0f, 1.0f},
+		{0.5f, 0.5f, 1.0f, 1.0f},
+		{0.5f, 0.5f, 1.0f, 1.0f},
 		{0.0f, 0.0f, 1.0f, 0.0f},
 	});
 
@@ -171,7 +171,7 @@ void drawString(const char* text, Vector3<float>* position, Vector3<float>* colo
 
 void renderer::display(int deltaTime) {
 	// clear the screen
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.5f, 0.5f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glDisable(GL_LIGHTING);
@@ -179,13 +179,9 @@ void renderer::display(int deltaTime) {
 	Vector3<float> camPos = cam->getPosition();
 	Vector3<float> camRot = cam->getRotation();
 
-	std::cout << "display" << std::endl;
-
 	std::string a = std::to_string(1000.0f / deltaTime);
 	Vector3<float>  pos = camPos + camRot;
 	Vector3<float>  col = { 1.0f, 0.0f, 0.0f };
-
-	std::cout << camPos.x << ", " << camPos.y << ", " << camPos.z << std::endl;
 
 	drawString("HELP", &pos, &col);
 

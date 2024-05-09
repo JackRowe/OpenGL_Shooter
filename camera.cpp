@@ -31,7 +31,6 @@ void camera::update(Vector3<int>& inputVector) {
 		position.z + relativeVector.z * CAMERA_SPEED
 	);
 
-
 	gluLookAt(
 		position.x,
 		position.y,
