@@ -21,10 +21,28 @@ void model::draw() {
 
 	glPushMatrix();
 
+	object* parent = getParent();
+	Vector3<float> scaleToApply = scale;
+
+	if (parent != nullptr) {
+		Vector3<float> parentPosition = parent->getPosition();
+		Vector3<float> parentRotation = parent->getRotation();
+		Vector3<float> parentScale = parent->getScale();
+
+		glTranslatef(parentPosition.x, parentPosition.y, parentPosition.z);
+		glRotatef(parentRotation.x, 1.0f, 0.0f, 0.0f);
+		glRotatef(parentRotation.y, 0.0f, 1.0f, 0.0f);
+		glRotatef(parentRotation.z, 0.0f, 0.0f, 1.0f);
+
+		scaleToApply += parentScale;
+	}
+
 	glTranslatef(position.x, position.y, position.z);
 	glRotatef(rotation.x, 1.0f, 0.0f, 0.0f);
 	glRotatef(rotation.y, 0.0f, 1.0f, 0.0f);
 	glRotatef(rotation.z, 0.0f, 0.0f, 1.0f);
+
+	object::draw();
 
 	glMaterialfv(GL_FRONT, GL_AMBIENT, _material->ambient);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, _material->diffuse);

@@ -27,8 +27,8 @@ public:
 	);
 	~object() {};
 
-	virtual void draw() {};
-	virtual void update() {};
+	virtual void draw();
+	virtual void update();
 
 	void setPosition(float x, float y, float z) { position.x = x; position.y = y; position.z = z; };
 	void setRotation(float x, float y, float z) { rotation.x = x; rotation.y = y; rotation.z = z; };

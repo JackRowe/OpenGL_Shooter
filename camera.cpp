@@ -20,9 +20,9 @@ void camera::update(Vector3<int>& inputVector) {
 	setRotation(position.x + direction.x, position.y + direction.y, position.z + direction.z);
 
 	Vector3<float> relativeVector = {
-		cos(toRadians(yaw)) * inputVector.z - sin(toRadians(yaw)) * -inputVector.x,
+		cos(toRadians(yaw)) * -inputVector.z - sin(toRadians(yaw)) * inputVector.x,
 		(float)inputVector.y,
-		sin(toRadians(yaw)) * inputVector.z + cos(toRadians(yaw)) * -inputVector.x
+		sin(toRadians(yaw)) * -inputVector.z + cos(toRadians(yaw)) * inputVector.x
 	};
 
 	setPosition(
