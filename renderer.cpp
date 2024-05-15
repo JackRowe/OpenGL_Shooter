@@ -110,15 +110,16 @@ void renderer::start() {
 		100.0f,
 	});
 
+	meshes.push_back(new mesh("Assets/skybox.obj"));
+	textures.push_back(new texture("Assets/skyboxer.jpg"));
+
 	meshes.push_back(new mesh("Assets/cube.obj"));
 	textures.push_back(new texture("Assets/cube.png"));
 
-	meshes.push_back(new mesh("Assets/skycube.obj"));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, 0.0f }, { 00.0f, 00.0f, -90.0f }, { 10000.0f, 10000.0f, 10000.0f }));
 
-	objects.push_back(new model(meshes[1], textures[0], materials[0], { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 10000.0f, 10000.0f, 10000.0f }));
-
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 0.0f, 0.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, 0.0f }));
+	objects.push_back(new model(meshes[1], textures[1], materials[0], { 10.0f, 0.0f, 0.0f }));
+	/*objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, 0.0f }));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, 10.0f }));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 10.0f, 10.0f }));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, 10.0f }));
@@ -144,7 +145,7 @@ void renderer::start() {
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, -10.0f, -10.0f }));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, -10.0f }));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 0.0f, -10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 00.0f, -10.0f, 00.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 00.0f, -10.0f, 00.0f }));*/
 
 	glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	controller->setMouseDelta({ 0 });
