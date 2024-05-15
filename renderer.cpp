@@ -92,10 +92,10 @@ void renderer::start() {
 
 	lights.push_back(new light{
 		GL_LIGHT0,
-		{1.0f, 1.0f, 1.0f, 0.0f},
-		{1.0f, 1.0f, 1.0f, 0.0f},
-		{0.5f, 0.5f, 0.5f, 1.0f},
-		{1.0f, 1.0f, 1.0f, 0.0f},
+		{0.5f, 0.5f, 1.0f, 1.0f},
+		{0.5f, 0.5f, 1.0f, 1.0f},
+		{0.5f, 0.5f, 1.0f, 1.0f},
+		{0.0f, 0.0f, 1.0f, 0.0f},
 	});
 
 	glLightfv(lights[0]->id, GL_AMBIENT, lights[0]->ambient);
@@ -114,11 +114,33 @@ void renderer::start() {
 	textures.push_back(new texture("Assets/cube.png"));
 
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 0.0f, 0.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 0.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, 10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 10.0f, 10.0f }));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, 10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 0.0f, 10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 00.0f, 10.0f, 00.0f }));
+
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 10.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, -10.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 10.0f, -10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, -10.0f, 10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 0.0f, -10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 0.0f, 10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 10.0f, 10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, -10.0f, 10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 10.0f, -10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, -10.0f, -10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, -10.0f, 10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, -10.0f }));
+
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 0.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, -10.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, -10.0f, -10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, -10.0f, -10.0f }));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, -10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 10.0f, 0.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, -10.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 0.0f, -10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 00.0f, -10.0f, 00.0f }));
 
 	glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	controller->setMouseDelta({ 0 });
@@ -138,10 +160,32 @@ void drawVector(std::vector<object*> objs)
 	}
 }
 
+void drawString(const char* text, Vector3<float>* position, Vector3<float>* colour) {
+	glPushMatrix();
+	glTranslatef(position->x, position->y, position->z);
+	glRasterPos2f(0.0f, 0.0f);
+	glColor3f(colour->x, colour->y, colour->z);
+	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)text);
+	glPopMatrix();
+}
+
 void renderer::display(int deltaTime) {
 	// clear the screen
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.5f, 0.5f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glDisable(GL_LIGHTING);
+
+	Vector3<float> camPos = cam->getPosition();
+	Vector3<float> camRot = cam->getRotation();
+
+	std::string a = std::to_string(1000.0f / deltaTime);
+	Vector3<float>  pos = camPos + camRot;
+	Vector3<float>  col = { 1.0f, 0.0f, 0.0f };
+
+	drawString("HELP", &pos, &col);
+
+	glEnable(GL_LIGHTING);
 
 	drawVector(objects);
 
@@ -182,16 +226,12 @@ void renderer::update(int deltaTime) {
 
 	Vector2<int> MousePosition = controller->getMousePosition();
 
-	if (MousePosition.x < MOUSE_BORDER || MousePosition.x > WINDOW_WIDTH - MOUSE_BORDER) {
+	if ((MousePosition.x < MOUSE_BORDER || MousePosition.x > WINDOW_WIDTH - MOUSE_BORDER) || (MousePosition.y < MOUSE_BORDER || MousePosition.y > WINDOW_HEIGHT - MOUSE_BORDER)) {
 		controller->setMouseDelta({ 0 });
 		controller->setMousePosition({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
 		glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	}
-	else if (MousePosition.y < MOUSE_BORDER || MousePosition.y > WINDOW_HEIGHT - MOUSE_BORDER) {
-		controller->setMouseDelta({ 0 });
-		controller->setMousePosition({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 });
-		glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
-	}
+
 
 	cam->update(controller->getInputVector());
 
