@@ -4,8 +4,6 @@ model::model(mesh* newMesh, texture* newTexture, material* newMaterial, const Ve
 	_mesh = newMesh;
 	_texture = newTexture;
 	_material = newMaterial;
-
-	std::cout << _texture->getTextureID();
 }
 
 void model::draw() {

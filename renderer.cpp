@@ -113,7 +113,7 @@ void renderer::start() {
 	meshes.push_back(new mesh("Assets/cube.obj"));
 	textures.push_back(new texture("Assets/cube.png"));
 
-	meshes.push_back(new mesh("Assets/skybox.obj"));
+	meshes.push_back(new mesh("Assets/skybox2.obj"));
 	textures.push_back(new texture("Assets/skyboxer.jpg"));
 
 	objects.push_back(new model(meshes[1], textures[1], materials[0], { 0.0f, 0.0f, 0.0f }, { 00.0f, 00.0f, -90.0f }, { 10000.0f, 10000.0f, 10000.0f }));
