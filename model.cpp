@@ -25,26 +25,33 @@ void model::draw() {
 
 	object* parent = getParent();
 	Vector3<float> scaleToApply = scale;
+	Vector3<float> positionToApply = position;
+	Vector3<float> rotationToApply = rotation;
 
-	if (parent != nullptr) {
+	// need to continually loop up thru the parents until we get to nullptr
+	while (parent != nullptr) {
 		Vector3<float> parentPosition = parent->getPosition();
 		Vector3<float> parentRotation = parent->getRotation();
 		Vector3<float> parentScale = parent->getScale();
 
-		glTranslatef(parentPosition.x, parentPosition.y, parentPosition.z);
+		positionToApply += parentPosition;
+		rotationToApply += parentRotation;
+
+		/*glTranslatef(parentPosition.x, parentPosition.y, parentPosition.z);
 		glRotatef(parentRotation.x, 1.0f, 0.0f, 0.0f);
 		glRotatef(parentRotation.y, 0.0f, 1.0f, 0.0f);
-		glRotatef(parentRotation.z, 0.0f, 0.0f, 1.0f);
+		glRotatef(parentRotation.z, 0.0f, 0.0f, 1.0f);*/
 
 		scaleToApply += parentScale;
+		parent = parent->getParent();
 	}
 
-	glTranslatef(position.x, position.y, position.z);
-	glRotatef(rotation.x, 1.0f, 0.0f, 0.0f);
-	glRotatef(rotation.y, 0.0f, 1.0f, 0.0f);
-	glRotatef(rotation.z, 0.0f, 0.0f, 1.0f);
+	glTranslatef(positionToApply.x, positionToApply.y, positionToApply.z);
+	glRotatef(rotationToApply.x, 1.0f, 0.0f, 0.0f);
+	glRotatef(rotationToApply.y, 0.0f, 1.0f, 0.0f);
+	glRotatef(rotationToApply.z, 0.0f, 0.0f, 1.0f);
 
-	object::draw();
+	//object::draw();
 
 	glMaterialfv(GL_FRONT, GL_AMBIENT, _material->ambient);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, _material->diffuse);

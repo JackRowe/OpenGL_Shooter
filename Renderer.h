@@ -35,6 +35,8 @@ public:
 	renderer(int argc, char* argv[]);
 	~renderer();
 
+	void updateVector(std::vector<object*> objs);
+
 	void start();
 	void display(int deltaTime);
 	void update(int deltaTime);

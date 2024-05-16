@@ -118,8 +118,10 @@ void renderer::start() {
 
 	objects.push_back(new model(meshes[1], textures[1], materials[0], { 0.0f, 0.0f, 0.0f }, { 00.0f, 00.0f, -90.0f }, { 10000.0f, 10000.0f, 10000.0f }));
 
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 0.0f, 0.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 30.0f, 0.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 10.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, {1.0f, 1.0f, 1.0f}, objects[1]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 5.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 0.5f, 0.5f, 0.5f }, objects[2]));
+	/*objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, 0.0f }));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, 10.0f }));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 10.0f, 10.0f }));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, 10.0f }));
@@ -145,7 +147,7 @@ void renderer::start() {
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, -10.0f, -10.0f }));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, -10.0f }));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 0.0f, -10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 00.0f, -10.0f, 00.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 00.0f, -10.0f, 00.0f }));*/
 
 	glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	controller->setMouseDelta({ 0 });
@@ -198,15 +200,16 @@ void renderer::display(int deltaTime) {
 	glutSwapBuffers();
 }
 
-void updateVector(std::vector<object*> objs)
+void renderer::updateVector(std::vector<object*> objs)
 {
-	for (int i = 0; i < objs.size(); i++)
+	// starts at 1 cause 0 is skybox
+	for (int i = 1; i < objs.size(); i++)
 	{
 		object* obj = objs[i];
 
+		obj->setRotation(frame, 0, 0);
 
-		if (obj->getChildren()->size() <= 0) obj->update();
-		else updateVector(*obj->getChildren());
+		obj->update();
 	}
 }
 
@@ -241,7 +244,7 @@ void renderer::update(int deltaTime) {
 	cam->update(controller->getInputVector());
 
 	// Update other objects
-	updateVector(objects);
+	this->updateVector(objects);
 	controller->setMouseDelta({ 0 });
 }
 
