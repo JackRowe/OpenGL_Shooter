@@ -4,6 +4,8 @@ model::model(mesh* newMesh, texture* newTexture, material* newMaterial, const Ve
 	_mesh = newMesh;
 	_texture = newTexture;
 	_material = newMaterial;
+
+	std::cout << _texture->getTextureID();
 }
 
 void model::draw() {
@@ -50,6 +52,10 @@ void model::draw() {
 	glMaterialfv(GL_FRONT, GL_SHININESS, &_material->shininess);
 
 	_texture == nullptr ? glDisable(GL_TEXTURE_2D) : glEnable(GL_TEXTURE_2D);
+
+	if (_texture != nullptr) {
+		glBindTexture(GL_TEXTURE_2D, _texture->getTextureID());
+	}
 
 	for (int i = 0; i < faces->size(); i++) {
 		std::vector<Vector3<int>> face = faces->at(i);
