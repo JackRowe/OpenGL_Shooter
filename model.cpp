@@ -33,11 +33,6 @@ void model::draw() {
 		Vector3<float> parentRotation = parent->getRotation();
 		Vector3<float> parentScale = parent->getScale();
 
-		if (depth > 0) {
-			positionToApply += parentPosition;
-			rotationToApply += parentRotation;
-		}
-
 		// this needs to also take into account all of their parents rotation?
 		glTranslatef(parentPosition.x, parentPosition.y, parentPosition.z);
 		glRotatef(parentRotation.x, 1.0f, 0.0f, 0.0f);
@@ -49,10 +44,10 @@ void model::draw() {
 		depth++;
 	}
 
-	glTranslatef(positionToApply.x, positionToApply.y, positionToApply.z);
-	glRotatef(rotationToApply.x, 1.0f, 0.0f, 0.0f);
-	glRotatef(rotationToApply.y, 0.0f, 1.0f, 0.0f);
-	glRotatef(rotationToApply.z, 0.0f, 0.0f, 1.0f);
+	glTranslatef(position.x, position.y, position.z);
+	glRotatef(rotation.x, 1.0f, 0.0f, 0.0f);
+	glRotatef(rotation.y, 0.0f, 1.0f, 0.0f);
+	glRotatef(rotation.z, 0.0f, 0.0f, 1.0f);
 
 	//object::draw();
 

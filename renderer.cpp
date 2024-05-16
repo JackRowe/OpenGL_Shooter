@@ -116,38 +116,44 @@ void renderer::start() {
 	meshes.push_back(new mesh("Assets/skybox2.obj"));
 	textures.push_back(new texture("Assets/skyboxer.jpg"));
 
-	objects.push_back(new model(meshes[1], textures[1], materials[0], { 0.0f, 0.0f, 0.0f }, { 00.0f, 00.0f, -90.0f }, { 10000.0f, 10000.0f, 10000.0f }));
+	meshes.push_back(new mesh("Assets/ground.obj"));
+	textures.push_back(new texture("Assets/grass.jpg"));
 
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 30.0f, 0.0f, 0.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 10.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, {1.0f, 1.0f, 1.0f}, objects[1]));
+	objects.push_back(new model(meshes[1], textures[1], materials[0], { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, -90.0f }, { 10000.0f, 10000.0f, 10000.0f }));
+
+	objects.push_back(new model(meshes[2], textures[2], materials[0], { 0.0f, -50.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 10.0f, 5.0f, 10.0f }));
+
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, 0.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 10.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, {1.0f, 1.0f, 1.0f}, objects[2]));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 5.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 0.5f, 0.5f, 0.5f }, objects[2]));
-	/*objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, 0.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, 10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 10.0f, 10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, 10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 0.0f, 10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 00.0f, 10.0f, 00.0f }));
 
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 10.0f, 0.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, -10.0f, 0.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 10.0f, -10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, -10.0f, 10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 0.0f, -10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 0.0f, 10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 10.0f, 10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, -10.0f, 10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 10.0f, -10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, -10.0f, -10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, -10.0f, 10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, -10.0f }));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, 10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 10.0f, 10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, 10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 0.0f, 10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 00.0f, 10.0f, 00.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
 
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 0.0f, 0.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, -10.0f, 0.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, -10.0f, -10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, -10.0f, -10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, -10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 0.0f, -10.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 00.0f, -10.0f, 00.0f }));*/
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 10.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, -10.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 10.0f, -10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, -10.0f, 10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 0.0f, -10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 0.0f, 10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 10.0f, 10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, -10.0f, 10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 10.0f, -10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, -10.0f, -10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, -10.0f, 10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, -10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, -10.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, -10.0f, -10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, -10.0f, -10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, -10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { -10.0f, 0.0f, -10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
+	objects.push_back(new model(meshes[0], textures[0], materials[0], { 00.0f, -10.0f, 00.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
 
 	glutWarpPointer(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	controller->setMouseDelta({ 0 });
@@ -203,7 +209,7 @@ void renderer::display(int deltaTime) {
 void renderer::updateVector(std::vector<object*> objs)
 {
 	// starts at 1 cause 0 is skybox
-	for (int i = 1; i < objs.size(); i++)
+	for (int i = 2; i < objs.size(); i++)
 	{
 		object* obj = objs[i];
 
@@ -243,6 +249,38 @@ void renderer::update(int deltaTime) {
 
 	cam->update(controller->getInputVector());
 
+	Vector3<float> position = objects[2]->getPosition();
+	float x = position.x;
+	float y = position.y;
+	float z = position.z;
+
+	if (controller->getKeyState('i')) {
+		z += 1.0f;
+		z += 1.0f;
+	}
+
+	if (controller->getKeyState('j')) {
+		x -= 1.0f;
+	}
+
+	if (controller->getKeyState('k')) {
+		z -= 1.0f;
+	}
+
+	if (controller->getKeyState('l')) {
+		x += 1.0f;
+	}
+
+	if (controller->getKeyState('u')) {
+		y += 1.0f;
+	}
+
+	if (controller->getKeyState('o')) {
+		y -= 1.0f;
+	}
+
+	objects[2]->setPosition(x, y, z);
+
 	// Update other objects
 	this->updateVector(objects);
 	controller->setMouseDelta({ 0 });
@@ -252,7 +290,13 @@ void renderer::idle() {
 	//std::cout << "idle" << std::endl;
 }
 
+// i: 105
+// j: 106
+// k: 107
+// l: 108
+
 void renderer::keyboard(unsigned char key, int x, int y, bool state) {
+	std::cout << (int)key << std::endl;
 	controller->setKeyState(key, state);
 }
 
