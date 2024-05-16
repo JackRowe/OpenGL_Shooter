@@ -23,6 +23,7 @@ void model::draw() {
 
 	glPushMatrix();
 
+	int depth = 0;
 	object* parent = getParent();
 	Vector3<float> scaleToApply = scale;
 	Vector3<float> positionToApply = position;
@@ -34,16 +35,20 @@ void model::draw() {
 		Vector3<float> parentRotation = parent->getRotation();
 		Vector3<float> parentScale = parent->getScale();
 
-		positionToApply += parentPosition;
-		rotationToApply += parentRotation;
+		if (depth > 0) {
+			positionToApply += parentPosition;
+			rotationToApply += parentRotation;
+		}
 
-		/*glTranslatef(parentPosition.x, parentPosition.y, parentPosition.z);
+		// this needs to also take into account all of their parents rotation?
+		glTranslatef(parentPosition.x, parentPosition.y, parentPosition.z);
 		glRotatef(parentRotation.x, 1.0f, 0.0f, 0.0f);
 		glRotatef(parentRotation.y, 0.0f, 1.0f, 0.0f);
-		glRotatef(parentRotation.z, 0.0f, 0.0f, 1.0f);*/
+		glRotatef(parentRotation.z, 0.0f, 0.0f, 1.0f);
 
 		scaleToApply += parentScale;
 		parent = parent->getParent();
+		depth++;
 	}
 
 	glTranslatef(positionToApply.x, positionToApply.y, positionToApply.z);
