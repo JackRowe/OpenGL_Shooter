@@ -30,6 +30,10 @@ private:
 	std::vector<texture*> textures = {};
 	std::vector<light*> lights = {};
 	std::vector<material*> materials = {};
+
+	float lastFrame = 0.0f;
+	int framesSinceLastFrame = 0;
+	int fps = 0;
 public:
 	renderer() {};
 	renderer(int argc, char* argv[]);

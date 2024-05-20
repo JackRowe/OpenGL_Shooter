@@ -180,8 +180,10 @@ void drawVector(std::vector<object*> objs)
 }
 
 void renderer::drawString(std::string text, Vector2<float>* position) {
+	glDisable(GL_DEPTH_TEST);
 	glRasterPos2f(position->x, position->y);
 	glutBitmapString(GLUT_BITMAP_8_BY_13, (const unsigned char*)text.c_str());
+	glEnable(GL_DEPTH_TEST);
 }
 
 void renderer::display(int deltaTime) {
@@ -193,11 +195,31 @@ void renderer::display(int deltaTime) {
 	drawVector(objects);
 	glDisable(GL_LIGHTING);
 
+	lastFrame += (float)deltaTime / 1000.0f;
+
+	std::cout << deltaTime << std::endl;
+
+	if (lastFrame > 1.0f) {
+		fps = framesSinceLastFrame;
+		framesSinceLastFrame = 0;
+		lastFrame = 0.0f;
+	}
+
 
 	Vector2<float> pos = { 0.0f, 0.0f };
-	drawString("test", &pos);
+	drawString("WASD: Camera Movement", &pos);
+
+	pos.y -= 1.0f;
+	drawString("IJKL: Object Movement", &pos);
+
+	pos.y -= 1.0f;
+	drawString("Objects: " + std::to_string(objects.size()), &pos);
+
+	pos.y -= 1.0f;
+	drawString("FPS: " + std::to_string(fps), &pos);
 
 	frame++;
+	framesSinceLastFrame++;
 	glutSwapBuffers();
 }
 
