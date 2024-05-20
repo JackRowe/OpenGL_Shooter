@@ -36,6 +36,7 @@ public:
 	~renderer();
 
 	void updateVector(std::vector<object*> objs);
+	void drawString(std::string text, Vector2<float>* position);
 
 	void start();
 	void display(int deltaTime);

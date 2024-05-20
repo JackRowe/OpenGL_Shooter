@@ -119,6 +119,12 @@ void renderer::start() {
 	meshes.push_back(new mesh("Assets/ground.obj"));
 	textures.push_back(new texture("Assets/grass.jpg"));
 
+	meshes.push_back(new mesh("Assets/ball.obj"));
+	textures.push_back(new texture("Assets/ball.png"));
+
+	meshes.push_back(new mesh("Assets/rafale.obj"));
+	meshes.push_back(new mesh("Assets/missile.obj"));
+
 	objects.push_back(new model(meshes[1], textures[1], materials[0], { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, -90.0f }, { 10000.0f, 10000.0f, 10000.0f }));
 
 	objects.push_back(new model(meshes[2], textures[2], materials[0], { 0.0f, -50.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 10.0f, 5.0f, 10.0f }));
@@ -173,34 +179,23 @@ void drawVector(std::vector<object*> objs)
 	}
 }
 
-void drawString(const char* text, Vector3<float>* position, Vector3<float>* colour) {
-	glPushMatrix();
-	glTranslatef(position->x, position->y, position->z);
-	glRasterPos2f(0.0f, 0.0f);
-	glColor3f(colour->x, colour->y, colour->z);
-	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (unsigned char*)text);
-	glPopMatrix();
+void renderer::drawString(std::string text, Vector2<float>* position) {
+	glRasterPos2f(position->x, position->y);
+	glutBitmapString(GLUT_BITMAP_8_BY_13, (const unsigned char*)text.c_str());
 }
 
 void renderer::display(int deltaTime) {
 	// clear the screen
 	glClearColor(0.5f, 0.5f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glDisable(GL_LIGHTING);
-
-	Vector3<float> camPos = cam->getPosition();
-	Vector3<float> camRot = cam->getRotation();
-
-	std::string a = std::to_string(1000.0f / deltaTime);
-	Vector3<float>  pos = camPos + camRot;
-	Vector3<float>  col = { 1.0f, 0.0f, 0.0f };
-
-	drawString("HELP", &pos, &col);
-
 	glEnable(GL_LIGHTING);
 
 	drawVector(objects);
+	glDisable(GL_LIGHTING);
+
+
+	Vector2<float> pos = { 0.0f, 0.0f };
+	drawString("test", &pos);
 
 	frame++;
 	glutSwapBuffers();
