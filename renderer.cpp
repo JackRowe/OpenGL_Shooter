@@ -129,9 +129,9 @@ void renderer::start() {
 
 	objects.push_back(new model(meshes[2], textures[2], materials[0], { 0.0f, -50.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 10.0f, 5.0f, 10.0f }));
 
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 0.0f, 0.0f }));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 10.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, {1.0f, 1.0f, 1.0f}, objects[2]));
-	objects.push_back(new model(meshes[0], textures[0], materials[0], { 0.0f, 5.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 0.5f, 0.5f, 0.5f }, objects[2]));
+	objects.push_back(new model(meshes[3], textures[3], materials[0], { 0.0f, 0.0f, 0.0f }));
+	objects.push_back(new model(meshes[4], textures[0], materials[0], { 0.0f, 10.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, {1.0f, 1.0f, 1.0f}, objects[2]));
+	objects.push_back(new model(meshes[5], textures[0], materials[0], { 0.0f, 5.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 0.5f, 0.5f, 0.5f }, objects[2]));
 
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
 	objects.push_back(new model(meshes[0], textures[0], materials[0], { 10.0f, 10.0f, 10.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, objects[2]));
@@ -197,8 +197,6 @@ void renderer::display(int deltaTime) {
 
 	lastFrame += (float)deltaTime / 1000.0f;
 
-	std::cout << deltaTime << std::endl;
-
 	if (lastFrame > 1.0f) {
 		fps = framesSinceLastFrame;
 		framesSinceLastFrame = 0;
@@ -207,10 +205,10 @@ void renderer::display(int deltaTime) {
 
 
 	Vector2<float> pos = { 0.0f, 0.0f };
-	drawString("WASD: Camera Movement", &pos);
+	drawString("WASDEQ: Camera Movement", &pos);
 
 	pos.y -= 1.0f;
-	drawString("IJKL: Object Movement", &pos);
+	drawString("IJKLOU: Object Movement", &pos);
 
 	pos.y -= 1.0f;
 	drawString("Objects: " + std::to_string(objects.size()), &pos);
@@ -313,7 +311,7 @@ void renderer::idle() {
 // l: 108
 
 void renderer::keyboard(unsigned char key, int x, int y, bool state) {
-	std::cout << (int)key << std::endl;
+	//std::cout << (int)key << std::endl;
 	controller->setKeyState(key, state);
 }
 
