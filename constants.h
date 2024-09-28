@@ -1,7 +1,7 @@
 #pragma once
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 800
+#define WINDOW_WIDTH 1080
+#define WINDOW_HEIGHT 1080
 #define REFRESH_RATE 16
 
 #define MOUSE_BORDER 200

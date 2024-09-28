@@ -7,7 +7,7 @@ void camera::update(Vector3<int>& inputVector) {
 
 	pitch = min(80.0f, max(pitch, -80.0f));
 
-	std::cout << inputVector.x << ", " << inputVector.y << ", " << inputVector.z << std::endl;
+	//std::cout << inputVector.x << ", " << inputVector.y << ", " << inputVector.z << std::endl;
 
 	// create a direction vector
 	Vector3<float> direction = {
